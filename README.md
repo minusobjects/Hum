@@ -33,7 +33,8 @@ There will be individual scripts to handle distinct elements of the app: `displa
 
 The app will consist of a single screen (plus the instructions modal). There will be simple controls to upload files and to play/pause/stop the audio. There will also be links to my own sites (Github, LinkedIn, etc.). Most of the app will be given over to the uploaded image - in a sense this app can also function as a sort of gallery display for a given image.
 
-![image of main app](./main_app.png)
+![image of main app](/hum_main_app.png)
+![image of instructions](/hum_instructions.png)
 
 ### Implementation Timeline
 
