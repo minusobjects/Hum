@@ -13,6 +13,7 @@ Users will be able to:
 The app will:
 - Modulate sound via an image's RGB color data.
 - Display uploaded images and play uploaded sound.
+- Display relevant file names
 
 There will also be:
 - A modal with information on how to use the app.
