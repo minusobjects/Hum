@@ -1,11 +1,30 @@
-// const Game = require('./lib/game.js')
 
 const canvasEl = document.getElementsByTagName("canvas")[0];
 canvasEl.height = window.innerHeight / 2;
 canvasEl.width = window.innerWidth / 2;
 
+var ctx = canvasEl.getContext('2d');
+
+var imageLoader = document.getElementById('imageLoader');
+imageLoader.addEventListener('change', handleImage, false);
+
+function handleImage(e){
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+            canvasEl.width = img.width / 2;
+            canvasEl.height = img.height / 2;
+            ctx.drawImage(img,0,0,img.width / 2,img.height / 2);
+        }
+        img.src = event.target.result;
+    }
+    // mp3 is read as type "audio/mp3"
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+
 if (canvasEl.getContext) {
-    var ctx = canvasEl.getContext('2d');
 
     ctx.fillStyle = 'yellow';
     ctx.strokeStyle = 'blue';
@@ -15,29 +34,3 @@ if (canvasEl.getContext) {
     ctx.strokeRect(50, 50, 50, 50);
 
   }
-
-
-  // <label>Image File:</label><br/>
-  // <input type="file" id="imageLoader" name="imageLoader"/>
-  // <canvas id="imageCanvas"></canvas>
-
-
-  // var imageLoader = document.getElementById('imageLoader');
-  //     imageLoader.addEventListener('change', handleImage, false);
-  // var canvas = document.getElementById('imageCanvas');
-  // var ctx = canvas.getContext('2d');
-  //
-  //
-  // function handleImage(e){
-  //     var reader = new FileReader();
-  //     reader.onload = function(event){
-  //         var img = new Image();
-  //         img.onload = function(){
-  //             canvas.width = img.width;
-  //             canvas.height = img.height;
-  //             ctx.drawImage(img,0,0);
-  //         }
-  //         img.src = event.target.result;
-  //     }
-  //     reader.readAsDataURL(e.target.files[0]);
-  // }
