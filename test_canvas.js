@@ -1,86 +1,95 @@
 
+// var requestAnimationFrame = window.requestAnimationFrame ||
+//                             window.mozRequestAnimationFrame ||
+//                             window.webkitRequestAnimationFrame ||
+//                             window.msRequestAnimationFrame;
+
 const canvasEl = document.getElementsByTagName("canvas")[0];
 canvasEl.height = window.innerHeight / 2;
 canvasEl.width = window.innerWidth / 2;
 
 const ctx = canvasEl.getContext('2d');
 
-//load default image, set to canvas
-// BUT not working locally!
-// need to use File API here?
-// let defaultImg = new Image();
-// defaultImg.src = 'defaults/rgb_default.png';
- // defaultImg.setAttribute('crossOrigin', '');
-// defaultImg.onload = function(){
-//   canvasEl.width = defaultImg.width / 2;
-//   canvasEl.height = defaultImg.height / 2;
-//   ctx.drawImage(defaultImg,0,0,defaultImg.width / 2,defaultImg.height / 2);
-// }
-
-// load default audio - seems to work fine with multiple files
-// BUT having errors locally! So, gonna turn it off for now.
-// let defaultHowl1 = new Howl({
-//   preload: true,
-//   volume: 0.5,
-//   src: 'defaults/neverturnback.mp3',
-//   onload: function() {
-//     console.log('Loaded Default 1!');
-//   },
-//   onplay: function() {
-//     console.log('Playing Default 1!');
-//   },
-//   onend: function() {
-//     console.log('Finished Default 1!');
-//   }
-// });
-//
-// let defaultHowl2 = new Howl({
-//   preload: true,
-//   volume: 0.5,
-//   src: 'defaults/80s_vibe.mp3',
-//   onload: function() {
-//     console.log('Loaded Default 2!');
-//   },
-//   onplay: function() {
-//     console.log('Playing Default 2!');
-//   },
-//   onend: function() {
-//     console.log('Finished Default 2!');
-//   }
-// });
-//
-// let defaultHowl3 = new Howl({
-//   preload: true,
-//   volume: 0.5,
-//   src: 'defaults/rave_digger.mp3',
-//   onload: function() {
-//     console.log('Loaded Default 3!');
-//   },
-//   onplay: function() {
-//     console.log('Playing Default 3!');
-//   },
-//   onend: function() {
-//     console.log('Finished Default 3!');
-//   }
-// });
-//
 let soundObj = {};
-// soundObj['audio1'] = defaultHowl1;
-// soundObj['audio2'] = defaultHowl2;
-// soundObj['audio3'] = defaultHowl3;
 
 const colorInfoButton = document.getElementById('colorInfoButton');
-colorInfoButton.addEventListener('click', getColorInfo, false);
+// colorInfoButton.addEventListener('click', getColorInfo, false);
+colorInfoButton.addEventListener('click', colorTimeline, false);
 
-function getColorInfo(){
-  let pixelInfo;
-  console.log('You clicked color button!');
-  pixelInfo = ctx.getImageData(0,0,2,canvasEl.height);
-  debugger
+function colorTimeline(){
+  let x = 0;
+  // don't forget to clear!
+  let setInt = window.setInterval(()=>{moveHead()}, 500);
+    function moveHead(){
+        x++;
+        ctx.fillStyle = 'orange';
+        ctx.fillRect(x, 0, 3, 5);
+        // console.log(x);
+        getColorInfo(x);
+    }
 }
 
-const imageLoader = document.getElementById('imageLoader');
-imageLoader.addEventListener('change', handleImage, false);
+let redData = [];
+let greenData = [];
+let blueData = [];
+let alphaData = [];
+let pixelInfo;
+let redSum;
+let greenSum;
+let blueSum;
+let alphaSum;
+
+function getColorInfo(x_coord){
+  pixelInfo = ctx.getImageData(x_coord,0,1,canvasEl.height);
+  redData.length = [];
+  greenData.length = [];
+  blueData.length = [];
+  alphaData.length = [];
+
+  for (let i = 0; i < pixelInfo.data.length; i = i + 4) {
+    redData.push(pixelInfo.data[i]);
+  }
+
+  for (let i = 1; i < pixelInfo.data.length; i = i + 4) {
+    greenData.push(pixelInfo.data[i]);
+  }
+
+  for (let i = 2; i < pixelInfo.data.length; i = i + 4) {
+    blueData.push(pixelInfo.data[i]);
+  }
+
+  for (let i = 3; i < pixelInfo.data.length; i = i + 4) {
+    alphaData.push(pixelInfo.data[i]);
+  }
+
+  redSum = redData.reduce((acc, val) => {
+    return acc + val;
+  }, 0);
+  greenSum = greenData.reduce((acc, val) => {
+    return acc + val;
+  }, 0);
+  blueSum = blueData.reduce((acc, val) => {
+    return acc + val;
+  }, 0);
+  alphaSum = alphaData.reduce((acc, val) => {
+    return acc + val;
+  }, 0);
+
+  console.log(redSum);
+  console.log(greenSum);
+  console.log(blueSum);
+  console.log(alphaSum);
+}
+
+const volumeNumber = document.getElementById('volumeNumber');
+volumeNumber.addEventListener('change', changeVolume, false);
+
+function changeVolume(e){
+  // right now just changes the first file
+  // could get this to work for any of the three
+  console.log('You changed the volume!');
+  soundObj['audio1'].volume(e.target.value);
+}
 
 const audioLoaders = document.getElementsByClassName('audioLoader');
 Array.prototype.forEach.call(audioLoaders, (loader) =>{
@@ -95,16 +104,6 @@ stopButton.addEventListener('click', stopAll, false);
 
 const pauseButton = document.getElementById('pauseButton');
 pauseButton.addEventListener('click', pauseAll, false);
-
-const volumeNumber = document.getElementById('volumeNumber');
-volumeNumber.addEventListener('change', changeVolume, false);
-
-function changeVolume(e){
-  // right now just changes the first file
-  // could get this to work for any of the three
-  console.log('You changed the volume!');
-  soundObj['audio1'].volume(e.target.value);
-}
 
 function playAll(){
   console.log('you clicked PLAY');
@@ -152,6 +151,8 @@ function handleAudio(e){
     reader.readAsDataURL(e.target.files[0]);
 }
 
+const imageLoader = document.getElementById('imageLoader');
+imageLoader.addEventListener('change', handleImage, false);
 
 function handleImage(e){
     let reader = new FileReader();
@@ -166,3 +167,8 @@ function handleImage(e){
     }
     reader.readAsDataURL(e.target.files[0]);
 }
+
+// start square in top left
+ctx.fillStyle = 'orange';
+// ctx.strokeStyle = 'blue';
+ctx.fillRect(0, 0, 3, 3);
