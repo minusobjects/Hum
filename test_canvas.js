@@ -5,7 +5,25 @@ canvasEl.width = window.innerWidth / 2;
 
 const ctx = canvasEl.getContext('2d');
 
+// no reason this couldn't work with multiple files, right?
+let defaultHowl1 = new Howl({
+  preload: true,
+  volume: 0.5,
+  src: './defaults/neverturnback.mp3',
+  onload: function() {
+    console.log('Loaded Default 1!');
+  },
+  onplay: function() {
+    console.log('Playing Default 1!');
+  },
+  onend: function() {
+    console.log('Finished Default 1!');
+  }
+});
+
 let soundObj = {};
+soundObj['audio1'] = defaultHowl1;
+
 
 const imageLoader = document.getElementById('imageLoader');
 imageLoader.addEventListener('change', handleImage, false);
