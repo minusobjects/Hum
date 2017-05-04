@@ -102,10 +102,14 @@ Array.prototype.forEach.call(audioLoaders, (loader) =>{
   loader.addEventListener('change', handleAudio, false);
 });
 
-// still need to get a way to pause.
-// I guess just stop the interval but not reset x?
 const pauseButton = document.getElementById('pauseButton');
-pauseButton.addEventListener('click', pauseAll, false);
+pauseButton.addEventListener('click', pauseInterval, false);
+
+function pauseInterval(){
+  pauseAll();
+  window.clearInterval(setInt);
+  console.log('Interval paused!')
+}
 
 function playAll(){
   soundObj['audio1'].play();
