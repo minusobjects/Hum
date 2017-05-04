@@ -8,14 +8,14 @@ const ctx = canvasEl.getContext('2d');
 //load default image, set to canvas
 // BUT not working locally!
 // need to use File API here?
-let defaultImg = new Image();
-defaultImg.src = 'defaults/rgb_default.png';
+// let defaultImg = new Image();
+// defaultImg.src = 'defaults/rgb_default.png';
  // defaultImg.setAttribute('crossOrigin', '');
-defaultImg.onload = function(){
-  canvasEl.width = defaultImg.width / 2;
-  canvasEl.height = defaultImg.height / 2;
-  ctx.drawImage(defaultImg,0,0,defaultImg.width / 2,defaultImg.height / 2);
-}
+// defaultImg.onload = function(){
+//   canvasEl.width = defaultImg.width / 2;
+//   canvasEl.height = defaultImg.height / 2;
+//   ctx.drawImage(defaultImg,0,0,defaultImg.width / 2,defaultImg.height / 2);
+// }
 
 // load default audio - seems to work fine with multiple files
 // BUT having errors locally!
