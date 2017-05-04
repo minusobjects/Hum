@@ -18,13 +18,16 @@ colorInfoButton.addEventListener('click', colorTimeline, false);
 
 function colorTimeline(){
   let x = 0;
+  let audio1Duration = soundObj['audio1'].duration();
+  // setting for audio1 for now - should be set to shortest duration.
+  let millies = (audio1Duration / canvasEl.width) * 1000;
+
   // don't forget to clear!
-  let setInt = window.setInterval(()=>{moveHead()}, 500);
+  let setInt = window.setInterval(()=>{moveHead()}, millies);
     function moveHead(){
         x++;
         ctx.fillStyle = 'orange';
         ctx.fillRect(x, 0, 3, 5);
-        // console.log(x);
         getColorInfo(x);
     }
 }
@@ -74,6 +77,10 @@ function getColorInfo(x_coord){
   alphaSum = alphaData.reduce((acc, val) => {
     return acc + val;
   }, 0);
+
+  let max = canvasEl.height * 255;
+
+  soundObj['audio1'].volume(redSum/max);
 
   console.log(redSum);
   console.log(greenSum);
