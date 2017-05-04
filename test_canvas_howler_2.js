@@ -28,20 +28,7 @@ function handleImage(e){
           console.log('Finished!');
         }
       });
-      // debugger
       sound.play();
     }
     reader.readAsDataURL(e.target.files[0]);
 }
-
-
-if (canvasEl.getContext) {
-
-    ctx.fillStyle = 'yellow';
-    ctx.strokeStyle = 'blue';
-
-    ctx.fillRect(25, 25, 100, 100);
-    ctx.clearRect(45, 45, 60, 60);
-    ctx.strokeRect(50, 50, 50, 50);
-
-  }
