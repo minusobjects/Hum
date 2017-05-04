@@ -2,13 +2,14 @@
 
 ### Background
 
-Hum will be a tool to mix sound via images: the RGB pixel data of a given image will modulate the volume of three sound files (one for each channel). My goal for this project is that it may be a fun and intuitive music-making tool for people without much musical experience (which would include myself). 
+Hum will be a tool to mix sound via images: the RGB pixel data of a given image will modulate the volume of three sound files (one for each channel). My goal for this project is that it may be a fun and intuitive music-making tool for people without much musical experience (which would include myself).
 
 ### MVP
 
 Users will be able to:
 - Upload image and sound files.
 - Play/pause/stop the music.
+- **Addition:** Draw colors to the canvas to affect the sound.
 
 The app will:
 - Modulate sound via an image's RGB color data.
