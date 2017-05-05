@@ -1,7 +1,13 @@
 
+// .custom {
+//   cursor: url(images/my-cursor.png), auto;
+// }
+
 const canvasEl = document.getElementsByTagName("canvas")[0];
 // canvasEl.height = window.innerHeight / 2;
 // canvasEl.width = window.innerWidth / 2;
+canvasEl.width = 1000;
+canvasEl.height = 600;
 
 const ctx = canvasEl.getContext('2d');
 
@@ -28,9 +34,10 @@ function colorTimeline(){
         current_x++;
         getColorInfo(current_x);
         // needs to account for painting
-        ctx.drawImage(currentImg,0,0,1000,600);
-        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-        ctx.fillRect(current_x, 0, 2, 600);
+        // ctx.drawImage(currentImg,0,0,1000,600);
+        redraw();
+        // ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+        // ctx.fillRect(current_x, 0, 2, 600);
         if(current_x >= canvasEl.width){
           stopInterval();
         }
@@ -101,7 +108,8 @@ function stopInterval(){
   stopAll();
   window.clearInterval(setInt);
   // needs to account for painting
-  ctx.drawImage(currentImg,0,0,1000,600);
+  // ctx.drawImage(currentImg,0,0,1000,600);
+  redraw();
   current_x = 0;
   console.log('Interval stopped!')
 }
@@ -146,7 +154,7 @@ function handleAudio(e){
     reader.onload = function(event){
       howl = new Howl({
         preload: true,
-        volume: 0.5,
+        volume: 0,
         src: [event.target.result],
         onload: function() {
           console.log('Loaded!');
@@ -173,10 +181,9 @@ function handleImage(e){
         img.onload = function(){
             // canvasEl.width = img.width / 2;
             // canvasEl.height = img.height / 2;
-            canvasEl.width = 1000;
-            canvasEl.height = 600;
             currentImg = img;
-            ctx.drawImage(img,0,0,1000,600);
+            // ctx.drawImage(img,0,0,1000,600);
+            redraw();
         }
         img.src = event.target.result;
     }
@@ -188,9 +195,77 @@ ctx.fillStyle = 'orange';
 // ctx.strokeStyle = 'blue';
 ctx.fillRect(0, 0, 3, 3);
 
-// this does seem to work to load images in
+// this does seem to work to load images into the canvas
 // var htmlImg = document.getElementById("htmlImg");
 // htmlImg.onload = function ()
 // {
 //   ctx.drawImage(htmlImg, 0, 0);
 // }
+
+
+
+$('#canvas').mousedown(function(e){
+  var mouseX = e.pageX - this.offsetLeft;
+  var mouseY = e.pageY - this.offsetTop;
+
+  paint = true;
+  addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+  redraw();
+});
+
+$('#canvas').mousemove(function(e){
+  if(paint){
+    addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+    redraw();
+  }
+});
+
+$('#canvas').mouseup(function(e){
+  paint = false;
+});
+
+$('#canvas').mouseleave(function(e){
+  paint = false;
+});
+
+var clickX = new Array();
+var clickY = new Array();
+var clickDrag = new Array();
+var paint;
+
+function addClick(x, y, dragging)
+{
+  clickX.push(x);
+  clickY.push(y);
+  clickDrag.push(dragging);
+}
+
+function redraw(){
+  // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
+  if(currentImg){
+    ctx.drawImage(currentImg,0,0,1000,600);
+  } else {
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  }
+
+  // ctx.strokeStyle = "#df4b26";
+  ctx.strokeStyle = "rgba(255,0,0,.5)"
+  ctx.lineJoin = "round";
+  ctx.lineWidth = 10;
+
+  for(var i=0; i < clickX.length; i++) {
+    ctx.beginPath();
+    if(clickDrag[i] && i){
+      ctx.moveTo(clickX[i-1], clickY[i-1]);
+     }else{
+       ctx.moveTo(clickX[i]-1, clickY[i]);
+     }
+     ctx.lineTo(clickX[i], clickY[i]);
+     ctx.closePath();
+     ctx.stroke();
+  }
+
+  ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+  ctx.fillRect(current_x, 0, 2, 600);
+
+}

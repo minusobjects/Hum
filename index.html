@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <canvas></canvas>
+    <canvas id="canvas" style="background-color:black; width:1000px; height:600px; cursor:pointer;"></canvas>
     <br/><br/>
     <label>Image File:<br/>
     <input type="file" id="imageLoader" name="imageLoader"/>
@@ -41,7 +41,9 @@
     </div>
     <!-- note that this does work to load an img in -->
     <img src="defaults/rgb_default.png" style="display:none;" id="htmlImg"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script src="howler-dist/howler.js"></script>
     <script src="test_canvas.js"></script>
+    <!-- <script src="test_paint.js"></script> -->
   </body>
 </html>
