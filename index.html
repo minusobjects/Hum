@@ -14,44 +14,80 @@
   <body>
     <canvas id="canvas" style="background-color:black; width:1000px; height:600px; cursor:pointer;"></canvas>
     <br/><br/>
-    <label>Image File:<br/>
-    <input type="file" id="imageLoader" name="imageLoader"/>
-    </label>
+    <ul style="display:flex; list-style:none;">
+      <li>
+      <label>Image File:<br/>
+      <input type="file" id="imageLoader" name="imageLoader"/>
+      </label>
+      </li>
+
+      <li>
+      <label>Audio File 1:<br/>
+      <input type="file" class="audioLoader" id="audio1" name="audioLoader1"/>
+      </label>
+      </li>
+
+      <li>
+      <label>Audio File 2:<br/>
+      <input type="file" class="audioLoader" id="audio2" name="audioLoader2"/>
+      </label>
+      </li>
+
+      <li>
+      <label>Audio File 3:<br/>
+      <input type="file" class="audioLoader" id="audio3" name="audioLoader3"/>
+      </label>
+      </li>
+    </ul>
     <br/><br/>
-    <label>Audio File 1:<br/>
-    <input type="file" class="audioLoader" id="audio1" name="audioLoader1"/>
-    </label>
-    <br/><br/>
-    <label>Audio File 2:<br/>
-    <input type="file" class="audioLoader" id="audio2" name="audioLoader2"/>
-    </label>
-    <br/><br/>
-    <label>Audio File 3:<br/>
-    <input type="file" class="audioLoader" id="audio3" name="audioLoader3"/>
-    </label>
-    <br/><br/>
-    <button id='colorInfoButton'>Color timer!</button>
-    <br/><br/>
-    <button id='pauseButton'>Pause button!</button>
-    <br/><br/>
-    <button id='stopIntervalButton'>Stop the insanity!</button>
-    <br/><br/>
-    <button id='purpleButton'>Purple!</button>
-    <br/><br/>
-    <button id='greenButton'>Green!</button>
-    <br/><br/>
-    <button id='yellowButton'>Yellow!</button>
-    <br/><br/>
-    <button id='brownButton'>Brown!</button>
-    <br/><br/>
-    <div id='volumeTest'>
-      Volume?
-    </div>
+    <ul style="display:flex; list-style:none;">
+      <li>
+      <button id='colorInfoButton'>Color timer!</button>
+      </li>
+
+      <li>
+      <button id='pauseButton'>Pause button!</button>
+      </li>
+
+      <li>
+      <button id='stopIntervalButton'>Stop the insanity!</button>
+      </li>
+
+      <li>
+      <button id='purpleButton'>Purple!</button>
+      </li>
+
+      <li>
+      <button id='greenButton'>Green!</button>
+      </li>
+
+      <li>
+      <button id='yellowButton'>Yellow!</button>
+      </li>
+
+      <li>
+      <button id='brownButton'>Brown!</button>
+      </li>
+
+      <li>
+      <button id='clearImgButton'>Clear img!</button>
+      </li>
+
+      <li>
+      <button id='clearPaintButton'>Clear paint!</button>
+      </li>
+
+      <li>
+      <div id='volumeTest'>
+        Red Volume?
+      </div>
+      </li>
+    </ul>
     <!-- note that this does work to load an img in -->
-    <img src="defaults/rgb_default.png" style="display:none;" id="htmlImg"/>
+    <!-- <img src="defaults/rgb_default.png" style="display:none;" id="htmlImg"/> -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
     <script src="howler-dist/howler.js"></script>
     <script src="test_canvas.js"></script>
-    <!-- <script src="test_paint.js"></script> -->
+
   </body>
 </html>

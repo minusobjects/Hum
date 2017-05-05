@@ -254,6 +254,26 @@ const colorBrown = "#986928";
 let curColor = colorPurple;
 let clickColor = new Array();
 
+const clearImgButton = document.getElementById('clearImgButton');
+clearImgButton.addEventListener('click', clearImg);
+
+const clearPaintButton = document.getElementById('clearPaintButton');
+clearPaintButton.addEventListener('click', clearPaint);
+
+function clearImg(){
+  currentImg = undefined;
+  redraw();
+}
+
+function clearPaint(){
+  clickX = new Array();
+  clickY = new Array();
+  clickDrag = new Array();
+  clickColor = new Array();
+  curColor = colorPurple;
+  redraw();
+}
+
 function redraw(){
   // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
   if(currentImg){
