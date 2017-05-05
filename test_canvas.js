@@ -190,11 +190,6 @@ function handleImage(e){
     reader.readAsDataURL(e.target.files[0]);
 }
 
-// start square in top left
-ctx.fillStyle = 'orange';
-// ctx.strokeStyle = 'blue';
-ctx.fillRect(0, 0, 3, 3);
-
 // this does seem to work to load images into the canvas
 // var htmlImg = document.getElementById("htmlImg");
 // htmlImg.onload = function ()
@@ -202,11 +197,21 @@ ctx.fillRect(0, 0, 3, 3);
 //   ctx.drawImage(htmlImg, 0, 0);
 // }
 
+const purpleButton = document.getElementById('purpleButton');
+purpleButton.addEventListener('click', ()=>{curColor = colorPurple;});
 
+const yellowButton = document.getElementById('yellowButton');
+yellowButton.addEventListener('click', ()=>{curColor = colorYellow;});
+
+const brownButton = document.getElementById('brownButton');
+brownButton.addEventListener('click', ()=>{curColor = colorBrown;});
+
+const greenButton = document.getElementById('greenButton');
+greenButton.addEventListener('click', ()=>{curColor = colorGreen;});
 
 $('#canvas').mousedown(function(e){
-  var mouseX = e.pageX - this.offsetLeft;
-  var mouseY = e.pageY - this.offsetTop;
+  let mouseX = e.pageX - this.offsetLeft;
+  let mouseY = e.pageY - this.offsetTop;
 
   paint = true;
   addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
@@ -228,17 +233,26 @@ $('#canvas').mouseleave(function(e){
   paint = false;
 });
 
-var clickX = new Array();
-var clickY = new Array();
-var clickDrag = new Array();
-var paint;
+let clickX = new Array();
+let clickY = new Array();
+let clickDrag = new Array();
+let paint;
 
 function addClick(x, y, dragging)
 {
   clickX.push(x);
   clickY.push(y);
   clickDrag.push(dragging);
+  clickColor.push(curColor);
 }
+
+const colorPurple = "#cb3594";
+const colorGreen = "#659b41";
+const colorYellow = "#ffcf33";
+const colorBrown = "#986928";
+
+let curColor = colorPurple;
+let clickColor = new Array();
 
 function redraw(){
   // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
@@ -249,11 +263,11 @@ function redraw(){
   }
 
   // ctx.strokeStyle = "#df4b26";
-  ctx.strokeStyle = "rgba(255,0,0,.5)"
+  // ctx.strokeStyle = "rgba(255,0,0,.5)"
   ctx.lineJoin = "round";
   ctx.lineWidth = 10;
 
-  for(var i=0; i < clickX.length; i++) {
+  for(let i=0; i < clickX.length; i++) {
     ctx.beginPath();
     if(clickDrag[i] && i){
       ctx.moveTo(clickX[i-1], clickY[i-1]);
@@ -262,6 +276,7 @@ function redraw(){
      }
      ctx.lineTo(clickX[i], clickY[i]);
      ctx.closePath();
+     ctx.strokeStyle = clickColor[i];
      ctx.stroke();
   }
 
