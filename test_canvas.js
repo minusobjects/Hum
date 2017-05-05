@@ -1,7 +1,7 @@
 
 const canvasEl = document.getElementsByTagName("canvas")[0];
-canvasEl.height = window.innerHeight / 2;
-canvasEl.width = window.innerWidth / 2;
+// canvasEl.height = window.innerHeight / 2;
+// canvasEl.width = window.innerWidth / 2;
 
 const ctx = canvasEl.getContext('2d');
 
@@ -9,6 +9,8 @@ let soundObj = {};
 
 let setInt;
 let current_x = 0;
+
+let currentImg;
 
 const colorInfoButton = document.getElementById('colorInfoButton');
 colorInfoButton.addEventListener('click', colorTimeline, false);
@@ -24,12 +26,14 @@ function colorTimeline(){
   setInt = window.setInterval(()=>{moveHead()}, millies);
     function moveHead(){
         current_x++;
+        getColorInfo(current_x);
+        // needs to account for painting
+        ctx.drawImage(currentImg,0,0,1000,600);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+        ctx.fillRect(current_x, 0, 2, 600);
         if(current_x >= canvasEl.width){
           stopInterval();
         }
-        ctx.fillStyle = 'orange';
-        ctx.fillRect(current_x, 0, 3, 5);
-        getColorInfo(current_x);
     }
     playAll();
 }
@@ -45,7 +49,7 @@ let blueSum;
 let alphaSum;
 
 function getColorInfo(x_coord){
-  pixelInfo = ctx.getImageData(x_coord,0,1,canvasEl.height);
+  pixelInfo = ctx.getImageData(x_coord+2,0,1,canvasEl.height);
   redData = [];
   greenData = [];
   blueData = [];
@@ -85,6 +89,9 @@ function getColorInfo(x_coord){
   soundObj['audio1'].volume(redSum/max);
   soundObj['audio2'].volume(greenSum/max);
   soundObj['audio3'].volume(blueSum/max);
+
+  // seems to work fine; could also do: element.setAttribute("style", "background-color: red;");
+  document.getElementById("volumeTest").innerHTML = redSum/max;
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -93,6 +100,8 @@ stopIntervalButton.addEventListener('click', stopInterval, false);
 function stopInterval(){
   stopAll();
   window.clearInterval(setInt);
+  // needs to account for painting
+  ctx.drawImage(currentImg,0,0,1000,600);
   current_x = 0;
   console.log('Interval stopped!')
 }
@@ -162,9 +171,12 @@ function handleImage(e){
     reader.onload = function(event){
         let img = new Image();
         img.onload = function(){
-            canvasEl.width = img.width / 2;
-            canvasEl.height = img.height / 2;
-            ctx.drawImage(img,0,0,img.width / 2,img.height / 2);
+            // canvasEl.width = img.width / 2;
+            // canvasEl.height = img.height / 2;
+            canvasEl.width = 1000;
+            canvasEl.height = 600;
+            currentImg = img;
+            ctx.drawImage(img,0,0,1000,600);
         }
         img.src = event.target.result;
     }
@@ -175,3 +187,10 @@ function handleImage(e){
 ctx.fillStyle = 'orange';
 // ctx.strokeStyle = 'blue';
 ctx.fillRect(0, 0, 3, 3);
+
+// this does seem to work to load images in
+// var htmlImg = document.getElementById("htmlImg");
+// htmlImg.onload = function ()
+// {
+//   ctx.drawImage(htmlImg, 0, 0);
+// }
