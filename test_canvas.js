@@ -1,15 +1,11 @@
 
-// .custom {
-//   cursor: url(images/my-cursor.png), auto;
-// }
-
 const canvasEl = document.getElementsByTagName("canvas")[0];
-// canvasEl.height = window.innerHeight / 2;
-// canvasEl.width = window.innerWidth / 2;
 canvasEl.width = 1000;
 canvasEl.height = 600;
 
 const ctx = canvasEl.getContext('2d');
+
+const bar = document.getElementById("bar");
 
 let soundObj = {};
 
@@ -30,10 +26,12 @@ function colorTimeline(){
   let millies = (shortestDur / canvasEl.width) * 1000;
 
   setInt = window.setInterval(()=>{moveHead()}, millies);
+    bar.style.display = `block`;
     function moveHead(){
         current_x++;
         getColorInfo(current_x);
-        redraw();
+        // redraw();
+        bar.style.marginLeft = `${current_x}px`;
         if(current_x >= canvasEl.width){
           stopInterval();
         }
@@ -41,10 +39,6 @@ function colorTimeline(){
     playAll();
 }
 
-// let redData = [];
-// let greenData = [];
-// let blueData = [];
-// let alphaData = [];
 let pixelInfo;
 let redSum;
 let greenSum;
@@ -78,6 +72,9 @@ stopIntervalButton.addEventListener('click', stopInterval, false);
 function stopInterval(){
   stopAll();
   window.clearInterval(setInt);
+  //also needs to account for bar now
+  bar.style.marginLeft = `0px`;
+  bar.style.display = `none`;
   redraw();
   current_x = 0;
   console.log('Interval stopped!')
@@ -189,17 +186,22 @@ const blackButton = document.getElementById('blackButton');
 blackButton.addEventListener('click', ()=>{curColor = colorBlack;});
 
 $('#canvas').mousedown(function(e){
-  let mouseX = e.pageX - this.offsetLeft;
-  let mouseY = e.pageY - this.offsetTop;
+  let mouseX = e.pageX - this.offsetLeft + 12;
+  let mouseY = e.pageY - this.offsetTop + 12;
 
   paint = true;
-  addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12);
+  // addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12);
+  addClick(mouseX, mouseY);
   redraw();
 });
 
 $('#canvas').mousemove(function(e){
+  let mouseX = e.pageX - this.offsetLeft + 12;
+  let mouseY = e.pageY - this.offsetTop + 12;
+
   if(paint){
-    addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12, true);
+    // addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12, true);
+    addClick(mouseX, mouseY, true);
     redraw();
   }
 });
@@ -281,7 +283,7 @@ function redraw(){
      ctx.stroke();
   }
 
-  ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-  ctx.fillRect(current_x, 0, 2, 600);
+  // ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+  // ctx.fillRect(current_x, 0, 2, 600);
 
 }
