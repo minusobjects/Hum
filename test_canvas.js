@@ -328,14 +328,36 @@ function redraw(){
   }
 }
 
-let SampleRGB1 = document.getElementById("Hum_RGB_1");
-let SampleRGB2 = document.getElementById("Hum_RGB_2");
-let SampleRGB3 = document.getElementById("Hum_RGB_3");
-let SampleRGB4 = document.getElementById("Hum_RGB_4");
+let sampleRGB1 = document.getElementById("Hum_RGB_1");
+let sampleRGB2 = document.getElementById("Hum_RGB_2");
+let sampleRGB3 = document.getElementById("Hum_RGB_3");
+let sampleRGB4 = document.getElementById("Hum_RGB_4");
 
-// meow
-// default image. doesn't work locally.
-SampleRGB1.onload = function(){
-  currentImg = SampleRGB1;
-  redraw();
+loadDefaultImage = function(){
+    let pickedImg;
+    let rand = Math.floor((Math.random() * 4) + 1);
+    switch (rand){
+      case 1:
+        pickedImg = sampleRGB1;
+        break;
+      case 2:
+        pickedImg = sampleRGB2;
+        break;
+      case 3:
+        pickedImg = sampleRGB3;
+        break;
+      case 4:
+        pickedImg = sampleRGB4;
+        break;
+      default:
+        pickedImg = sampleRGB1;
+        break;
+    }
+    pickedImg.onload = function(){
+      currentImg = pickedImg;
+      redraw();
+    }
 }
+
+// requires server!
+loadDefaultImage();
