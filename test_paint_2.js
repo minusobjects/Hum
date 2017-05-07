@@ -3,32 +3,32 @@ var y = 0;
 var lastX;
 var lastY;
 function draw(x,y,w,r,g,b,a){
-        var gradient = ctx.createRadialGradient(x, y, 0, x, y, w);
+        var gradient = ctx2.createRadialGradient(x, y, 0, x, y, w);
         gradient.addColorStop(0, 'rgba('+r+', '+g+', '+b+', '+a+')');
         gradient.addColorStop(1, 'rgba('+r+', '+g+', '+b+', 0)');
 
-        ctx.beginPath();
-        ctx.arc(x, y, w, 0, 2 * Math.PI);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-        ctx.closePath();
+        ctx2.beginPath();
+        ctx2.arc(x, y, w, 0, 2 * Math.PI);
+        ctx2.fillStyle = gradient;
+        ctx2.fill();
+        ctx2.closePath();
 };
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+var canvasTwo = document.getElementById('canvasTwo');
+var ctx2 = canvasTwo.getContext('2d');
 var w = 10;
 var radius = w/2;
 var going = false;
-$('canvas').mousedown(function(e){
+$(canvasTwo).mousedown(function(e){
     going = true;
     lastX = e.offsetX;
     lastY = e.offsetY;
-    draw(lastX, lastY,w,100,100,100, 0.5);
+    draw(lastX, lastY,w,200,200,200, 0.5);
 });
-$('canvas').mouseup(function(){
+$(canvasTwo).mouseup(function(){
     going = false;
 });
-$('canvas').mousemove(function(e){
-    if(going == true){
+$(canvasTwo).mousemove(function(e){
+    if(going === true){
         x = e.offsetX;
         y = e.offsetY;
 
@@ -37,9 +37,9 @@ $('canvas').mousemove(function(e){
 
         // for each pixel distance, draw a circle on the line connecting the two points
         // to get a continous line.
-        for (i=0;i<dis;i+=1) {
+        for (i=0;i<dis;i++) {
             var s = i/dis;
-            draw(lastX*s + x*(1-s), lastY*s + y*(1-s),w,100,100,100, 0.5);
+            draw(lastX*s + x*(1-s), lastY*s + y*(1-s),w,200,200,200, 0.5);
         }
         lastX = x;
         lastY = y;

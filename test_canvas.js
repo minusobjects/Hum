@@ -2,12 +2,63 @@
 const canvasEl = document.getElementsByTagName("canvas")[0];
 canvasEl.width = 1000;
 canvasEl.height = 600;
+canvasEl.onselectstart = function(){ return false; };
 
 const ctx = canvasEl.getContext('2d');
 
 const bar = document.getElementById("bar");
 
+// load default audio - seems to work fine with multiple files
+// BUT having errors locally...
+let defaultHowl1 = new Howl({
+  preload: true,
+  volume: 0,
+  src: 'defaults/Red_sample.wav',
+  onload: function() {
+    console.log('Loaded Default 1!');
+  },
+  onplay: function() {
+    console.log('Playing Default 1!');
+  },
+  onend: function() {
+    console.log('Finished Default 1!');
+  }
+});
+
+let defaultHowl2 = new Howl({
+  preload: true,
+  volume: 0,
+  src: 'defaults/Green_sample.wav',
+  onload: function() {
+    console.log('Loaded Default 2!');
+  },
+  onplay: function() {
+    console.log('Playing Default 2!');
+  },
+  onend: function() {
+    console.log('Finished Default 2!');
+  }
+});
+
+let defaultHowl3 = new Howl({
+  preload: true,
+  volume: 0,
+  src: 'defaults/Blue_sample.wav',
+  onload: function() {
+    console.log('Loaded Default 3!');
+  },
+  onplay: function() {
+    console.log('Playing Default 3!');
+  },
+  onend: function() {
+    console.log('Finished Default 3!');
+  }
+});
+
 let soundObj = {};
+soundObj['audio1'] = defaultHowl1;
+soundObj['audio2'] = defaultHowl2;
+soundObj['audio3'] = defaultHowl3;
 
 let setInt;
 let current_x = 0;
@@ -161,6 +212,15 @@ function handleImage(e){
 //   ctx.drawImage(htmlImg, 0, 0);
 // }
 
+let SampleRGB1 = document.getElementById("Hum_RGB_1");
+let SampleRGB2 = document.getElementById("Hum_RGB_2");
+let SampleRGB3 = document.getElementById("Hum_RGB_3");
+let SampleRGB4 = document.getElementById("Hum_RGB_4");
+
+// meow
+// default image. doesn't work locally.
+currentImg = SampleRGB1;
+
 const purpleButton = document.getElementById('purpleButton');
 purpleButton.addEventListener('click', ()=>{curColor = colorPurple;});
 
@@ -282,8 +342,7 @@ function redraw(){
      ctx.strokeStyle = clickColor[i];
      ctx.stroke();
   }
-
-  // ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-  // ctx.fillRect(current_x, 0, 2, 600);
-
 }
+
+ // when default image is loaded in
+redraw();
