@@ -12,8 +12,13 @@
   </head>
 
   <body>
-    <canvas id="canvas" style="background-color:black; width:1000px; height:600px; cursor: url(defaults/circle.png), auto;;"></canvas>
-    <br/><br/>
+    <div style="position:relative; background-color:yellow;">
+      <canvas id="canvas" style="position:absolute; background-color:black; width:1000px; height:600px; auto; z-index:10; cursor: url(defaults/circle.png), auto;"></canvas>
+      <canvas id="canvas" style="position:absolute; background-color: orange; position: absolute; width:3px; height:600px; z-index:20; margin-left:10px"></canvas>
+    </div>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/>
     <ul style="display:flex; list-style:none;">
       <li>
       <label>Image File:<br/>

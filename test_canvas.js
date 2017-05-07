@@ -33,11 +33,7 @@ function colorTimeline(){
     function moveHead(){
         current_x++;
         getColorInfo(current_x);
-        // needs to account for painting
-        // ctx.drawImage(currentImg,0,0,1000,600);
         redraw();
-        // ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
-        // ctx.fillRect(current_x, 0, 2, 600);
         if(current_x >= canvasEl.width){
           stopInterval();
         }
@@ -45,53 +41,28 @@ function colorTimeline(){
     playAll();
 }
 
-let redData = [];
-let greenData = [];
-let blueData = [];
-let alphaData = [];
+// let redData = [];
+// let greenData = [];
+// let blueData = [];
+// let alphaData = [];
 let pixelInfo;
 let redSum;
 let greenSum;
 let blueSum;
 let alphaSum;
+let max = canvasEl.height * 255;
 
 function getColorInfo(x_coord){
   pixelInfo = ctx.getImageData(x_coord+2,0,1,canvasEl.height);
-  redData = [];
-  greenData = [];
-  blueData = [];
-  alphaData = [];
+  redSum = 0;
+  greenSum = 0;
+  blueSum = 0;
 
   for (let i = 0; i < pixelInfo.data.length; i = i + 4) {
-    redData.push(pixelInfo.data[i]);
+    redSum = redSum + pixelInfo.data[i];
+    greenSum = greenSum + pixelInfo.data[i+1];
+    blueSum = blueSum + pixelInfo.data[i+2];
   }
-
-  for (let i = 1; i < pixelInfo.data.length; i = i + 4) {
-    greenData.push(pixelInfo.data[i]);
-  }
-
-  for (let i = 2; i < pixelInfo.data.length; i = i + 4) {
-    blueData.push(pixelInfo.data[i]);
-  }
-
-  for (let i = 3; i < pixelInfo.data.length; i = i + 4) {
-    alphaData.push(pixelInfo.data[i]);
-  }
-
-  redSum = redData.reduce((acc, val) => {
-    return acc + val;
-  }, 0);
-  greenSum = greenData.reduce((acc, val) => {
-    return acc + val;
-  }, 0);
-  blueSum = blueData.reduce((acc, val) => {
-    return acc + val;
-  }, 0);
-  alphaSum = alphaData.reduce((acc, val) => {
-    return acc + val;
-  }, 0);
-
-  let max = canvasEl.height * 255;
 
   soundObj['audio1'].volume(redSum/max);
   soundObj['audio2'].volume(greenSum/max);
@@ -107,8 +78,6 @@ stopIntervalButton.addEventListener('click', stopInterval, false);
 function stopInterval(){
   stopAll();
   window.clearInterval(setInt);
-  // needs to account for painting
-  // ctx.drawImage(currentImg,0,0,1000,600);
   redraw();
   current_x = 0;
   console.log('Interval stopped!')
@@ -172,20 +141,18 @@ function handleAudio(e){
 }
 
 const imageLoader = document.getElementById('imageLoader');
+imageLoader.onclick = function(){this.value = null;};
 imageLoader.addEventListener('change', handleImage, false);
 
 function handleImage(e){
     let reader = new FileReader();
     reader.onload = function(event){
-        let img = new Image();
-        img.onload = function(){
-            // canvasEl.width = img.width / 2;
-            // canvasEl.height = img.height / 2;
-            currentImg = img;
-            // ctx.drawImage(img,0,0,1000,600);
-            redraw();
-        }
-        img.src = event.target.result;
+      let img = new Image();
+      img.onload = function(){
+        currentImg = img;
+        redraw();
+      }
+      img.src = event.target.result;
     }
     reader.readAsDataURL(e.target.files[0]);
 }
@@ -258,10 +225,6 @@ function addClick(x, y, dragging)
   clickColor.push(curColor);
 }
 
-// const colorPurple = "#cb3594";
-// const colorGreen = "#659b41";
-// const colorYellow = "#ffcf33";
-// const colorBrown = "#986928";
 const colorRed = "rgba(255,0,0,.5)";
 const colorYellow = "rgba(255,255,0,.5)";
 const colorGreen = "rgba(0,255,0,.5)";
@@ -290,7 +253,7 @@ function clearPaint(){
   clickY = new Array();
   clickDrag = new Array();
   clickColor = new Array();
-  curColor = colorPurple;
+  curColor = colorRed;
   redraw();
 }
 
@@ -302,8 +265,6 @@ function redraw(){
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 
-  // ctx.strokeStyle = "#df4b26";
-  // ctx.strokeStyle = "rgba(255,0,0,.5)"
   ctx.lineJoin = "round";
   ctx.lineWidth = 25;
 
