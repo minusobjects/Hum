@@ -203,24 +203,36 @@ purpleButton.addEventListener('click', ()=>{curColor = colorPurple;});
 const yellowButton = document.getElementById('yellowButton');
 yellowButton.addEventListener('click', ()=>{curColor = colorYellow;});
 
-const brownButton = document.getElementById('brownButton');
-brownButton.addEventListener('click', ()=>{curColor = colorBrown;});
-
 const greenButton = document.getElementById('greenButton');
 greenButton.addEventListener('click', ()=>{curColor = colorGreen;});
+
+const redButton = document.getElementById('redButton');
+redButton.addEventListener('click', ()=>{curColor = colorRed;});
+
+const blueButton = document.getElementById('blueButton');
+blueButton.addEventListener('click', ()=>{curColor = colorBlue;});
+
+const cyanButton = document.getElementById('cyanButton');
+cyanButton.addEventListener('click', ()=>{curColor = colorCyan;});
+
+const whiteButton = document.getElementById('whiteButton');
+whiteButton.addEventListener('click', ()=>{curColor = colorWhite;});
+
+const blackButton = document.getElementById('blackButton');
+blackButton.addEventListener('click', ()=>{curColor = colorBlack;});
 
 $('#canvas').mousedown(function(e){
   let mouseX = e.pageX - this.offsetLeft;
   let mouseY = e.pageY - this.offsetTop;
 
   paint = true;
-  addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+  addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12);
   redraw();
 });
 
 $('#canvas').mousemove(function(e){
   if(paint){
-    addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+    addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12, true);
     redraw();
   }
 });
@@ -246,12 +258,20 @@ function addClick(x, y, dragging)
   clickColor.push(curColor);
 }
 
-const colorPurple = "#cb3594";
-const colorGreen = "#659b41";
-const colorYellow = "#ffcf33";
-const colorBrown = "#986928";
+// const colorPurple = "#cb3594";
+// const colorGreen = "#659b41";
+// const colorYellow = "#ffcf33";
+// const colorBrown = "#986928";
+const colorRed = "rgba(255,0,0,.5)";
+const colorYellow = "rgba(255,255,0,.5)";
+const colorGreen = "rgba(0,255,0,.5)";
+const colorCyan = "rgba(0,255,255,.5)";
+const colorBlue = "rgba(0,0,255,.5)";
+const colorPurple = "rgba(255,0,255,.5)";
+const colorWhite = "rgba(255,255,255,.5)";
+const colorBlack = "rgba(0,0,0,.5)";
 
-let curColor = colorPurple;
+let curColor = colorRed;
 let clickColor = new Array();
 
 const clearImgButton = document.getElementById('clearImgButton');
@@ -285,7 +305,7 @@ function redraw(){
   // ctx.strokeStyle = "#df4b26";
   // ctx.strokeStyle = "rgba(255,0,0,.5)"
   ctx.lineJoin = "round";
-  ctx.lineWidth = 10;
+  ctx.lineWidth = 25;
 
   for(let i=0; i < clickX.length; i++) {
     ctx.beginPath();
