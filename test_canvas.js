@@ -185,7 +185,7 @@ whiteButton.addEventListener('click', ()=>{curColor = colorWhite;});
 const blackButton = document.getElementById('blackButton');
 blackButton.addEventListener('click', ()=>{curColor = colorBlack;});
 
-$('#canvas').mousedown(function(e){
+$(canvasEl).mousedown(function(e){
   let mouseX = e.pageX - this.offsetLeft + 12;
   let mouseY = e.pageY - this.offsetTop + 12;
 
@@ -195,7 +195,7 @@ $('#canvas').mousedown(function(e){
   redraw();
 });
 
-$('#canvas').mousemove(function(e){
+$(canvasEl).mousemove(function(e){
   let mouseX = e.pageX - this.offsetLeft + 12;
   let mouseY = e.pageY - this.offsetTop + 12;
 

@@ -13,6 +13,8 @@
       }
       li {
         padding-left: 6px;
+        height:40px;
+        font-size:40px;
       }
     </style>
   </head>
@@ -24,23 +26,23 @@
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
     <br/><br/><br/><br/><br/><br/><br/>
-    <div id="bottom" style="background-color: bisque;">
+    <div id="bottom" style="background: linear-gradient(#bbab8e,bisque);">
     <ul style="display:flex; list-style:none;">
       <li>
-      <a id='colorInfoButton'><i class="fa fa-play-circle-o" style="color:white"></i></a>
+      <a id='colorInfoButton'><i class="fa fa-play-circle-o" style="color:#555"></i></a>
       </li>
 
       <li>
-      <a id='pauseButton'><i class="fa fa-pause-circle-o" style="color:white"></i></a>
+      <a id='pauseButton'><i class="fa fa-pause-circle-o" style="color:#555"></i></a>
       </li>
 
       <li>
-      <a id='stopIntervalButton'><i class="fa fa-stop-circle-o" style="color:white"></i></a>
+      <a id='stopIntervalButton'><i class="fa fa-stop-circle-o" style="color:#555"></i></a>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-image-o" style="color:white"></i>
+          <i class="fa fa-file-image-o" style="color:#555"></i>
           <input type="file" id="imageLoader" name="imageLoader" style="display:none;"/>
         </label>
       </li>
@@ -102,18 +104,15 @@
       <a id='blackButton'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
       </li>
 
+    </ul>
+    <br/><br/>
+    <ul style="display:flex; list-style:none; font-family: 'Univers', 'Arial', sans-serif;">
       <li>
       <a id='clearImgButton'>CLEAR IMAGE</a>
       </li>
-
       <li>
       <a id='clearPaintButton'>CLEAR PAINT</a>
       </li>
-
-    </ul>
-    <br/><br/>
-    <ul style="display:flex; list-style:none;">
-
       <li>
       <div id='volumeTest'>
         Red Volume?
