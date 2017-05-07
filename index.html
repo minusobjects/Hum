@@ -22,13 +22,17 @@
   <!-- <canvas id="canvasTwo" width="1000px" height="600px"  style="position:absolute; z-index:20; cursor: url(defaults/circle.png), auto;"></canvas> -->
 
   <body>
+    <div id="instrux" style="position:fixed; top:0; width:100%; height:100%; margin: 0 auto; background-color:yellow; opacity:.5; z-index:40;">
+      <div style="position:fixed; width:600px; top:30px; left:50%; margin-left:-300px; background-color:pink;">
+        Hi!!!
+      </div>
+    </div>
     <div id="main" style="width:1000px; margin: 0 auto; margin-top: 30px;">
       <canvas id="canvas" width="1000px" height="600px" style="position:absolute; background-color:black; z-index:10; cursor: url(defaults/circle.png), auto;"></canvas>
       <div id="bar" style="position:absolute; background-color: rgba(255,255,255,.5); position: absolute; width:2px; height:600px; z-index:30; margin-left:0px; cursor: url(defaults/circle.png), auto; display:none;"></div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <br/><br/><br/><br/><br/><br/><br/>
-    <div id="bottom" style="background: linear-gradient(#bbab8e,bisque);">
+    <br/><br/>
+  </div>
+    <div id="bottom" style="background: linear-gradient(#bbab8e,bisque); width:100%; text-align:center; margin-top:650px; position:absolute;">
     <ul style="display:flex; list-style:none;">
       <li>
       <a id='colorInfoButton'><i class="fa fa-play-circle-o" style="color:#555"></i></a>
@@ -116,13 +120,25 @@
       <a id='clearPaintButton'>CLEAR PAINT</a>
       </li>
       <li>
-      <div id='volumeTest'>
-        Red Volume?
+      <div id='volumeTest' style="background-color:rgba(255,0,0,0)">
+        Red
+      </div>
+      <div id='imageName'>
+        current image
+      </div>
+      <div id='redAudioName'>
+        current red
+      </div>
+      <div id='greenAudioName'>
+        current green
+      </div>
+      <div id='blueAudioName'>
+        current blue
       </div>
       </li>
     </ul>
   </div>
-    <!-- note that this does work to load an img in -->
+
     <img src="defaults/Hum_RGB_1.png" style="display:none;" id="Hum_RGB_1"/>
     <img src="defaults/Hum_RGB_2.png" style="display:none;" id="Hum_RGB_2"/>
     <img src="defaults/Hum_RGB_3.png" style="display:none;" id="Hum_RGB_3"/>

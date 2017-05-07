@@ -60,6 +60,13 @@ soundObj['audio1'] = defaultHowl1;
 soundObj['audio2'] = defaultHowl2;
 soundObj['audio3'] = defaultHowl3;
 
+let audioNames = {};
+audioNames['audio1'] = 'Red_sample.wav';
+audioNames['audio2'] = 'Green_sample.wav';
+audioNames['audio3'] = 'Blue_sample.wav';
+
+setAudioNames();
+
 let setInt;
 let current_x = 0;
 
@@ -114,7 +121,8 @@ function getColorInfo(x_coord){
   soundObj['audio3'].volume(blueSum/max);
 
   // seems to work fine; could also do: element.setAttribute("style", "background-color: red;");
-  document.getElementById("volumeTest").innerHTML = redSum/max;
+  // document.getElementById("volumeTest").innerHTML = redSum/max;
+  document.getElementById("volumeTest").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -184,7 +192,9 @@ function handleAudio(e){
         }
       });
       soundObj[audioId] = howl;
+      setAudioNames();
     }
+    audioNames[audioId] = e.target.files[0].name;
     reader.readAsDataURL(e.target.files[0]);
 }
 
@@ -192,16 +202,20 @@ const imageLoader = document.getElementById('imageLoader');
 imageLoader.onclick = function(){this.value = null;};
 imageLoader.addEventListener('change', handleImage, false);
 
+let currentImgName;
+
 function handleImage(e){
     let reader = new FileReader();
     reader.onload = function(event){
       let img = new Image();
       img.onload = function(){
         currentImg = img;
+        setImageName()
         redraw();
       }
       img.src = event.target.result;
     }
+    currentImgName = e.target.files[0].name;
     reader.readAsDataURL(e.target.files[0]);
 }
 
@@ -291,6 +305,8 @@ clearPaintButton.addEventListener('click', clearPaint);
 
 function clearImg(){
   currentImg = undefined;
+  currentImgName = '(none)';
+  setImageName();
   redraw();
 }
 
@@ -339,25 +355,41 @@ loadDefaultImage = function(){
     switch (rand){
       case 1:
         pickedImg = sampleRGB1;
+        currentImgName = 'Hum_RGB_1.png';
         break;
       case 2:
         pickedImg = sampleRGB2;
+        currentImgName = 'Hum_RGB_2.png';
         break;
       case 3:
         pickedImg = sampleRGB3;
+        currentImgName = 'Hum_RGB_3.png';
         break;
       case 4:
         pickedImg = sampleRGB4;
+        currentImgName = 'Hum_RGB_4.png';
         break;
       default:
         pickedImg = sampleRGB1;
+        currentImgName = 'Hum_RGB_1.png';
         break;
     }
     pickedImg.onload = function(){
       currentImg = pickedImg;
+      setImageName();
       redraw();
     }
 }
 
 // requires server!
-loadDefaultImage();
+// loadDefaultImage();
+
+function setImageName(){
+  document.getElementById("imageName").innerHTML = currentImgName;
+}
+
+function setAudioNames(){
+  document.getElementById("redAudioName").innerHTML = audioNames['audio1'];
+  document.getElementById("greenAudioName").innerHTML = audioNames['audio2'];
+  document.getElementById("blueAudioName").innerHTML = audioNames['audio3'];
+}
