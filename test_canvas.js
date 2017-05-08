@@ -389,7 +389,7 @@ loadDefaultImage = function(){
 }
 
 // requires server!
-loadDefaultImage();
+// loadDefaultImage();
 
 const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
 
@@ -416,7 +416,7 @@ function setSampleImgNumber(){
     if(sampleImgSelect[n] === true){
       imgNumber.setAttribute(`style`, `color:white;`);
     } else {
-      imgNumber.setAttribute(`style`, `color:black;`);
+      imgNumber.setAttribute(`style`, `color:default;`);
     }
   });
 }
