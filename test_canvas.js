@@ -120,9 +120,9 @@ function getColorInfo(x_coord){
   soundObj['audio2'].volume(greenSum/max);
   soundObj['audio3'].volume(blueSum/max);
 
-  // seems to work fine; could also do: element.setAttribute("style", "background-color: red;");
-  // document.getElementById("volumeTest").innerHTML = redSum/max;
-  document.getElementById("volumeTest").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});`);
+  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});`);
+  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/max});`);
+  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/max});`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -219,29 +219,29 @@ function handleImage(e){
     reader.readAsDataURL(e.target.files[0]);
 }
 
-const purpleButton = document.getElementById('purpleButton');
-purpleButton.addEventListener('click', ()=>{curColor = colorPurple;});
+const colorButtons = document.getElementsByClassName('colorButton');
+Array.prototype.forEach.call(colorButtons, (button) =>{
+  button.addEventListener('click', changeColor, false);
+});
 
-const yellowButton = document.getElementById('yellowButton');
-yellowButton.addEventListener('click', ()=>{curColor = colorYellow;});
+function changeColor(e){
+  curColor = eval(e.currentTarget.id);
+  document.getElementById("currentColorButton").setAttribute(`style`, `color:${curColor};`);
+}
 
-const greenButton = document.getElementById('greenButton');
-greenButton.addEventListener('click', ()=>{curColor = colorGreen;});
+const instruxButton = document.getElementById('instruxButton');
+instruxButton.addEventListener('click', loadInstrux, false);
 
-const redButton = document.getElementById('redButton');
-redButton.addEventListener('click', ()=>{curColor = colorRed;});
+function loadInstrux(){
+  document.getElementById("instrux").classList.add('instruxLoad');
+}
 
-const blueButton = document.getElementById('blueButton');
-blueButton.addEventListener('click', ()=>{curColor = colorBlue;});
+const instrux = document.getElementById('instrux');
+instrux.addEventListener('click', unloadInstrux, false);
 
-const cyanButton = document.getElementById('cyanButton');
-cyanButton.addEventListener('click', ()=>{curColor = colorCyan;});
-
-const whiteButton = document.getElementById('whiteButton');
-whiteButton.addEventListener('click', ()=>{curColor = colorWhite;});
-
-const blackButton = document.getElementById('blackButton');
-blackButton.addEventListener('click', ()=>{curColor = colorBlack;});
+function unloadInstrux(){
+  $("#instrux").removeClass('instruxLoad');
+}
 
 $(canvasEl).mousedown(function(e){
   let mouseX = e.pageX - this.offsetLeft + 12;
@@ -295,6 +295,7 @@ const colorWhite = "rgba(255,255,255,.5)";
 const colorBlack = "rgba(0,0,0,.5)";
 
 let curColor = colorRed;
+document.getElementById("currentColorButton").setAttribute(`style`, `color:${curColor};`);
 let clickColor = new Array();
 
 const clearImgButton = document.getElementById('clearImgButton');

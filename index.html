@@ -10,21 +10,53 @@
       }
       body {
         background-color: #444;
+        font-family: 'Univers', 'Arial', sans-serif;"
       }
       li {
         padding-left: 6px;
         height:40px;
         font-size:40px;
       }
+      .instrux {
+        position:fixed;
+        top:0;
+        width:100%;
+        height:100%;
+        margin: 0 auto;
+        background-color:rgba(100,100,100,.5);
+        opacity:0;
+        z-index:40;
+        visibility: hidden;
+        transition: .5s;
+      }
+      .instrux.instruxLoad {
+        transition: .5s;
+        visibility: visible;
+        opacity: 1;
+      }
+
     </style>
   </head>
 
   <!-- <canvas id="canvasTwo" width="1000px" height="600px"  style="position:absolute; z-index:20; cursor: url(defaults/circle.png), auto;"></canvas> -->
 
   <body>
-    <div id="instrux" style="position:fixed; top:0; width:100%; height:100%; margin: 0 auto; background-color:yellow; opacity:.5; z-index:40;">
-      <div style="position:fixed; width:600px; top:30px; left:50%; margin-left:-300px; background-color:pink;">
-        Hi!!!
+    <div class="instrux" id="instrux">
+      <div style="position:fixed; width:600px; top:30px; left:50%; margin-left:-300px; background-color:bisque;">
+        <h3>Hum is a color-based music/audio mixer.</h3>
+        <br/>
+        Change the volume of the three audio tracks via the amounts of red, green and blue (respectively) in the central image (on a computer screen, all images are made-up of red, green and blue).
+        <br/><br/>
+        Click the file buttons to load your own audio and image files.
+        <br/><br/>
+        Add color by selecting from the palette and then clicking on the canvas.
+        <br/><br/>
+        Remember: the audio will stop at the end of the shortest track.
+        <br/><br/> <br/><br/>
+        Hum was made by Michael Newton in May, 2017.
+        <br/><br/>
+        (link) (link) (link)
+        <br/><br/>
       </div>
     </div>
     <div id="main" style="width:1000px; margin: 0 auto; margin-top: 30px;">
@@ -75,39 +107,43 @@
       </li>
 
       <li>
-      <a id='currentColorButton'><i class="fa fa-circle" style="color:pink"></i></a>
+      <a id='currentColorButton'><i class="fa fa-circle"></i></a>
       </li>
 
       <li>
-      <a id='purpleButton'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
+      <a class='colorButton' id='colorPurple'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
       </li>
 
       <li>
-      <a id='greenButton'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
+      <a class='colorButton' id='colorGreen'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
       </li>
 
       <li>
-      <a id='yellowButton'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
+      <a class='colorButton' id='colorYellow'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
       </li>
 
       <li>
-      <a id='redButton'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
+      <a class='colorButton' id='colorRed'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
       </li>
 
       <li>
-      <a id='blueButton'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
+      <a class='colorButton' id='colorBlue'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
       </li>
 
       <li>
-      <a id='cyanButton'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
+      <a class='colorButton' id='colorCyan'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
       </li>
 
       <li>
-      <a id='whiteButton'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
+      <a class='colorButton' id='colorWhite'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
       </li>
 
       <li>
-      <a id='blackButton'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
+      <a class='colorButton' id='colorBlack'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
+      </li>
+
+      <li>
+      <a id='instruxButton'><i class="fa fa-question-circle-o" style="color:black"></i></a>
       </li>
 
     </ul>
@@ -120,8 +156,14 @@
       <a id='clearPaintButton'>CLEAR PAINT</a>
       </li>
       <li>
-      <div id='volumeTest' style="background-color:rgba(255,0,0,0)">
+      <div id='redVol' style="background-color:rgba(255,0,0,0)">
         Red
+      </div>
+      <div id='greenVol' style="background-color:rgba(0,255,0,0)">
+        Green
+      </div>
+      <div id='blueVol' style="background-color:rgba(0,0,255,0)">
+        Blue
       </div>
       <div id='imageName'>
         current image
