@@ -9,7 +9,7 @@ const ctx = canvasEl.getContext('2d');
 const bar = document.getElementById("bar");
 
 // load default audio - seems to work fine with multiple files
-// BUT having errors locally...
+// BUT having CORS errors locally...
 let defaultHowl1 = new Howl({
   preload: true,
   volume: 0,
@@ -88,7 +88,6 @@ function colorTimeline(){
     function moveHead(){
         current_x++;
         getColorInfo(current_x);
-        // redraw();
         bar.style.marginLeft = `${current_x}px`;
         if(current_x >= canvasEl.width){
           stopInterval();
@@ -131,7 +130,6 @@ stopIntervalButton.addEventListener('click', stopInterval, false);
 function stopInterval(){
   stopAll();
   window.clearInterval(setInt);
-  //also needs to account for bar now
   bar.style.marginLeft = `0px`;
   bar.style.display = `none`;
   redraw();
@@ -248,7 +246,6 @@ $(canvasEl).mousedown(function(e){
   let mouseY = e.pageY - this.offsetTop + 12;
 
   paint = true;
-  // addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12);
   addClick(mouseX, mouseY);
   redraw();
 });
@@ -258,7 +255,6 @@ $(canvasEl).mousemove(function(e){
   let mouseY = e.pageY - this.offsetTop + 12;
 
   if(paint){
-    // addClick(e.pageX - this.offsetLeft + 12, e.pageY - this.offsetTop + 12, true);
     addClick(mouseX, mouseY, true);
     redraw();
   }
@@ -308,6 +304,8 @@ function clearImg(){
   currentImg = undefined;
   currentImgName = '(none)';
   setImageName();
+  sampleImgSelect = [false, false, false, false];
+  setSampleImgNumber();
   redraw();
 }
 
@@ -350,6 +348,8 @@ let sampleRGB2 = document.getElementById("Hum_RGB_2");
 let sampleRGB3 = document.getElementById("Hum_RGB_3");
 let sampleRGB4 = document.getElementById("Hum_RGB_4");
 
+let sampleImgSelect = [false, false, false, false];
+
 loadDefaultImage = function(){
     let pickedImg;
     let rand = Math.floor((Math.random() * 4) + 1);
@@ -357,33 +357,69 @@ loadDefaultImage = function(){
       case 1:
         pickedImg = sampleRGB1;
         currentImgName = 'Hum_RGB_1.png';
+        sampleImgSelect[0] = true;
         break;
       case 2:
         pickedImg = sampleRGB2;
         currentImgName = 'Hum_RGB_2.png';
+        sampleImgSelect[1] = true;
         break;
       case 3:
         pickedImg = sampleRGB3;
         currentImgName = 'Hum_RGB_3.png';
+        sampleImgSelect[2] = true;
         break;
       case 4:
         pickedImg = sampleRGB4;
         currentImgName = 'Hum_RGB_4.png';
+        sampleImgSelect[3] = true;
         break;
       default:
         pickedImg = sampleRGB1;
         currentImgName = 'Hum_RGB_1.png';
+        sampleImgSelect[0] = true;
         break;
     }
     pickedImg.onload = function(){
       currentImg = pickedImg;
       setImageName();
+      setSampleImgNumber();
       redraw();
     }
 }
 
 // requires server!
-// loadDefaultImage();
+loadDefaultImage();
+
+const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
+
+function readySampleImgNumbers(){
+  Array.prototype.forEach.call(sampleImgNumbers, (imgNumber) => {
+    imgNumber.addEventListener('click', (e) => {
+      sampleImgSelect = [false, false, false, false];
+      currentImg = eval(e.currentTarget.id);
+      let n = parseInt(e.currentTarget.attributes.data.value);
+      sampleImgSelect[n] = true;
+      currentImgName = currentImg.src.split(/(\\|\/)/g).pop();
+      setSampleImgNumber();
+      setImageName();
+      redraw();
+    });
+  });
+}
+
+readySampleImgNumbers();
+
+function setSampleImgNumber(){
+  Array.prototype.forEach.call(sampleImgNumbers, (imgNumber) =>{
+    let n = parseInt(imgNumber.attributes.data.value);
+    if(sampleImgSelect[n] === true){
+      imgNumber.setAttribute(`style`, `color:white;`);
+    } else {
+      imgNumber.setAttribute(`style`, `color:black;`);
+    }
+  });
+}
 
 function setImageName(){
   document.getElementById("imageName").innerHTML = currentImgName;
