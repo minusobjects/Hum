@@ -150,38 +150,46 @@
       <li>
       <a class="button grayButton" id='instruxButton'><i class="fa fa-question-circle-o"></i></a>
       </li>
-
     </ul>
-    <br/><br/>
-    <ul style="display:flex;">
-      <li>
-      <a id='clearImgButton'>CLEAR IMAGE</a>
+    <br/>
+    <ul class="bottomButtons">
+      <li class="fileList">
+        <div id='imageName'>
+          Current image
+        </div>
+        <div id='redAudioName' style="color:red;">
+          Current red
+        </div>
+        <div id='greenAudioName' style="color:green;">
+          Current green
+        </div>
+        <div id='blueAudioName' style="color:blue;">
+          Current blue
+        </div>
       </li>
-      <li>
-      <a id='clearPaintButton'>CLEAR PAINT</a>
+      <li class="volList">
+        <div id='redVol' style="background-color:rgba(255,0,0,0); color:red;">
+          R
+        </div>
+        <div id='greenVol' style="background-color:rgba(0,255,0,0); color:green;">
+          G
+        </div>
+        <div id='blueVol' style="background-color:rgba(0,0,255,0); color:blue;">
+          B
+        </div>
       </li>
-      <li>
-      <div id='redVol' style="background-color:rgba(255,0,0,0)">
-        Red
-      </div>
-      <div id='greenVol' style="background-color:rgba(0,255,0,0)">
-        Green
-      </div>
-      <div id='blueVol' style="background-color:rgba(0,0,255,0)">
-        Blue
-      </div>
-      <div id='imageName'>
-        current image
-      </div>
-      <div id='redAudioName'>
-        current red
-      </div>
-      <div id='greenAudioName'>
-        current green
-      </div>
-      <div id='blueAudioName'>
-        current blue
-      </div>
+      <li class="clearList">
+        <div>
+          <a id='clearImgButton'>CLEAR IMAGE</a>
+        </div>
+        <div>
+          <a id='clearPaintButton'>CLEAR PAINT</a>
+        </div>
+      </li>
+      <li class="title">
+        <div>
+          HUM
+        </div>
       </li>
     </ul>
   </div>

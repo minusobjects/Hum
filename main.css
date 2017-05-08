@@ -82,6 +82,13 @@ ul {
   padding-left:20px;
   padding-right:20px;
 }
+.bottomButtons{
+  margin-top:-18px;
+  display:flex;
+  justify-content:flex-start;
+  padding-left:20px;
+  padding-right:20px;
+}
 .grayButton{
   color: #555;
 }
@@ -127,4 +134,46 @@ ul {
   /*padding-left:6px;*/
   height:40px;
   font-size:36px;
+}
+.fileList{
+  margin-right:20px;
+  text-align: left;
+  color:#555;
+  opacity:.7;
+  font-size:18px;
+}
+
+.volList{
+  margin-right:20px;
+  text-align: left;
+  /*color:#555;*/
+  /*opacity:.7;*/
+  font-size:18px;
+}
+.volList div {
+  padding-top:4px;
+  padding-bottom:4px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.clearList{
+  margin-right:20px;
+  text-align: left;
+  color:#555;
+  opacity:.7;
+  font-size:18px;
+  cursor: pointer;
+}
+.clearList div {
+  padding-top:4px;
+  padding-bottom:4px;
+}
+
+.title div{
+  position: relative;
+  left: 340px;
+  top: 5px;
+  font-size: 60px;
+  color: #555;
+  letter-spacing: .5em;
 }

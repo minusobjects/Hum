@@ -119,9 +119,9 @@ function getColorInfo(x_coord){
   soundObj['audio2'].volume(greenSum/max);
   soundObj['audio3'].volume(blueSum/max);
 
-  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});`);
-  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/max});`);
-  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/max});`);
+  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});color:red;`);
+  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/max});color:green;`);
+  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/max});color:blue`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -389,7 +389,7 @@ loadDefaultImage = function(){
 }
 
 // requires server!
-// loadDefaultImage();
+loadDefaultImage();
 
 const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
 
