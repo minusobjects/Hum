@@ -13,19 +13,19 @@ const bar = document.getElementById("bar");
 let defaultHowl1 = new Howl({
   preload: true,
   volume: 0,
-  src: 'defaults/Red_sample.wav',
+  src: 'defaults/440.wav',
 });
 
 let defaultHowl2 = new Howl({
   preload: true,
   volume: 0,
-  src: 'defaults/Green_sample.wav',
+  src: 'defaults/300.wav',
 });
 
 let defaultHowl3 = new Howl({
   preload: true,
   volume: 0,
-  src: 'defaults/Blue_sample.wav',
+  src: 'defaults/150.wav',
 });
 
 let soundObj = {};
@@ -34,9 +34,9 @@ soundObj['audio2'] = defaultHowl2;
 soundObj['audio3'] = defaultHowl3;
 
 let audioNames = {};
-audioNames['audio1'] = 'Red_sample.wav';
-audioNames['audio2'] = 'Green_sample.wav';
-audioNames['audio3'] = 'Blue_sample.wav';
+audioNames['audio1'] = '150.wav';
+audioNames['audio2'] = '300.wav';
+audioNames['audio3'] = '440.wav';
 
 setAudioNames();
 
@@ -411,7 +411,7 @@ function setAudioNames(){
 
 window.onload = function(){
   // meow
-  // setTimeout(loadInstrux, 1000);
+  setTimeout(loadInstrux, 1000);
 }
 
 let enableStr = 'enable';
@@ -493,15 +493,72 @@ $("#blueVol").tooltip({
   show: { effect: "blind", duration: 300 },
   content: "Audio level for the blue channel."
 });
-// $(audioLoaders).tooltip({
+// $('.audioLoaderButton').tooltip({
 //   classes: {
 //     "ui-tooltip": "highlight"
 //   },
 //   show: { effect: "blind", duration: 300 },
 //   content: "Load your own audio into the red, green, or blue channels."
 // });
+$('#audio1Button').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Load your own audio into the red channel."
+});
+$('#audio2Button').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Load your own audio into the green channel."
+});
+$('#audio3Button').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Load your own audio into the blue channel."
+});
+$(sampleImgNumbers).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Load one of the sample images into the background."
+});
+$('#imageName').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "The current background image."
+});
+$('#redAudioName').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "The audio currently on the red channel."
+});
+$('#greenAudioName').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "The audio currently on the green channel."
+});
+$('#blueAudioName').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "The audio currently on the blue channel."
+});
 
-
+// DRY this up of course
+// also, tooltip stuff should probably be in a separate file
 $(clearImgButton).tooltip( enableStr );
 $(clearPaintButton).tooltip( enableStr );
 $(colorButtons).tooltip( enableStr );
@@ -509,8 +566,16 @@ $(currentColorButton).tooltip( enableStr );
 $(stopIntervalButton).tooltip( enableStr );
 // $(pauseButton).tooltip( enableStr );
 $(colorInfoButton).tooltip( enableStr );
-// $(audioLoaders).tooltip( enableStr );
+// $('.audioLoaderButton').tooltip( enableStr );
+$('#audio1Button').tooltip( enableStr );
+$('#audio2Button').tooltip( enableStr );
+$('#audio3Button').tooltip( enableStr );
 $('#imageLoaderButton').tooltip( enableStr );
 $('#redVol').tooltip( enableStr );
 $('#greenVol').tooltip( enableStr );
 $('#blueVol').tooltip( enableStr );
+$(sampleImgNumbers).tooltip( enableStr );
+$('#imageName').tooltip( enableStr );
+$('#redAudioName').tooltip( enableStr );
+$('#greenAudioName').tooltip( enableStr );
+$('#blueAudioName').tooltip( enableStr );

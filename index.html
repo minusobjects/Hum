@@ -29,9 +29,9 @@
         <br/><br/>
         Remember: the audio will stop at the end of the shortest track.
         <br/><br/></br>
-        Hum was made by Michael Newton in May, 2017.
-        <br/><br/>
-        (link tk) (link tk) (link tk)
+        Hum was made by Michael Newton in May, 2017. Learn more about me here:
+        <br/>
+        <a href="https://minusobjects.github.io/">portfolio</a> | <a href="https://github.com/minusobjects">github</a> | <a href="https://www.linkedin.com/in/michael-newton-976588140/">linkedin</a>
         <br/><br/>
       </div>
     </div>
@@ -65,21 +65,21 @@
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o button" style="color:red"></i>
+          <i id="audio1Button" title="audio1Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:red"></i>
           <input type="file" class="audioLoader" id="audio1" name="audioLoader1" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o button" style="color:green"></i>
+          <i id="audio2Button" title="audio2Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:green"></i>
           <input type="file" class="audioLoader" id="audio2" name="audioLoader2" style="display:none;"/>
         </label>
       </li>
 
       <li>
         <label>
-          <i class="fa fa-file-audio-o button" style="color:blue"></i>
+          <i id="audio3Button" title="audio3Button" class="fa fa-file-audio-o button audioLoaderButton" style="color:blue"></i>
           <input type="file" class="audioLoader" id="audio3" name="audioLoader3" style="display:none;"/>
         </label>
       </li>
@@ -129,19 +129,19 @@
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB1' data=0>1</a></div>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB1' title='sampleRGB1' data=0>1</a></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB2' data=1>2</a></div>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB2' title='sampleRGB2' data=1>2</a></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB3' data=2>3</a></div>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB3' title='sampleRGB3' data=2>3</a></div>
       </li>
 
       <li>
-        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB4' data=3>4</a></div>
+        <div class="textButton"><a class='sampleImgNumber' id='sampleRGB4' title='sampleRGB4' data=3>4</a></div>
       </li>
 
       <li>
@@ -155,16 +155,16 @@
     <br/>
     <ul class="bottomButtons">
       <li class="fileList">
-        <div id='imageName'>
-          Current image
+        <div id='imageName' title='imageName'>
+          (none)
         </div>
-        <div id='redAudioName' style="color:red;">
+        <div id='redAudioName' title='redAudioName' style="color:red;">
           Current red
         </div>
-        <div id='greenAudioName' style="color:green;">
+        <div id='greenAudioName' title='greenAudioName' style="color:green;">
           Current green
         </div>
-        <div id='blueAudioName' style="color:blue;">
+        <div id='blueAudioName' title='blueAudioName' style="color:blue;">
           Current blue
         </div>
       </li>

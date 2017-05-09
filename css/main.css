@@ -38,13 +38,17 @@ ul {
   margin-left:-300px;
   background-color:bisque;
   padding-left:30px;
-  padding-right:20px;
+  padding-right:30px;
   padding-bottom:30px;
   padding-top:20px;
   color:#666;
 }
 .innerInstrux h3{
   margin-bottom:.3em;
+}
+.innerInstrux a{
+  text-decoration:none;
+  color:#999;
 }
 
 .mainDiv{
