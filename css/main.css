@@ -57,7 +57,7 @@ ul {
   position:absolute;
   background-color:black;
   z-index:10;
-  cursor: url(defaults/circle.png), auto;
+  cursor: url(./circle_70.png), auto;
 }
 
 .bar{
@@ -68,7 +68,7 @@ ul {
   height:600px;
   z-index:30;
   margin-left:0px;
-  cursor: url(defaults/circle.png), auto;
+  cursor: url(./circle_70.png), auto;
   display:none;
 }
 

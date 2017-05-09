@@ -86,6 +86,7 @@ let greenSum;
 let blueSum;
 let alphaSum;
 let max = canvasEl.height * 255;
+let halfMax = max / 2;
 
 function getColorInfo(x_coord){
   pixelInfo = ctx.getImageData(x_coord+2,0,1,canvasEl.height);
@@ -99,13 +100,13 @@ function getColorInfo(x_coord){
     blueSum = blueSum + pixelInfo.data[i+2];
   }
 
-  soundObj['audio1'].volume(redSum/max);
-  soundObj['audio2'].volume(greenSum/max);
-  soundObj['audio3'].volume(blueSum/max);
+  soundObj['audio1'].volume(redSum/halfMax);
+  soundObj['audio2'].volume(greenSum/halfMax);
+  soundObj['audio3'].volume(blueSum/halfMax);
 
-  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/max});color:red;`);
-  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/max});color:green;`);
-  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/max});color:blue`);
+  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/halfMax});color:red;`);
+  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/halfMax});color:green;`);
+  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/halfMax});color:blue`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -197,9 +198,10 @@ Array.prototype.forEach.call(colorButtons, (button) =>{
   button.addEventListener('click', changeColor, false);
 });
 
+const currentColorButton = document.getElementById("currentColorButton");
 function changeColor(e){
   curColor = eval(e.currentTarget.id);
-  document.getElementById("currentColorButton").setAttribute(`style`, `color:${curColor};`);
+  currentColorButton.setAttribute(`style`, `color:${curColor};`);
 }
 
 const instruxButton = document.getElementById('instruxButton');
@@ -217,8 +219,8 @@ function unloadInstrux(){
 }
 
 $(canvasEl).mousedown(function(e){
-  let mouseX = e.pageX - this.offsetLeft + 12;
-  let mouseY = e.pageY - this.offsetTop + 12;
+  let mouseX = e.pageX - this.offsetLeft + 35;
+  let mouseY = e.pageY - this.offsetTop + 35;
 
   paint = true;
   addClick(mouseX, mouseY);
@@ -226,8 +228,8 @@ $(canvasEl).mousedown(function(e){
 });
 
 $(canvasEl).mousemove(function(e){
-  let mouseX = e.pageX - this.offsetLeft + 12;
-  let mouseY = e.pageY - this.offsetTop + 12;
+  let mouseX = e.pageX - this.offsetLeft + 35;
+  let mouseY = e.pageY - this.offsetTop + 35;
 
   if(paint){
     addClick(mouseX, mouseY, true);
@@ -302,7 +304,7 @@ function redraw(){
   }
 
   ctx.lineJoin = "round";
-  ctx.lineWidth = 25;
+  ctx.lineWidth = 70;
 
   for(let i=0; i < clickX.length; i++) {
     ctx.beginPath();
@@ -364,7 +366,8 @@ loadDefaultImage = function(){
 }
 
 // requires server!
-loadDefaultImage();
+// meow
+// loadDefaultImage();
 
 const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
 
@@ -407,5 +410,107 @@ function setAudioNames(){
 }
 
 window.onload = function(){
-  setTimeout(loadInstrux, 1000);
+  // meow
+  // setTimeout(loadInstrux, 1000);
 }
+
+let enableStr = 'enable';
+
+$(clearImgButton).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Clear the image, but not the paint."
+});
+$(clearPaintButton).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Clear the paint, but not the image."
+});
+$(currentColorButton).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Current paint color."
+});
+$(colorButtons).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Choose a color to paint with."
+});
+$(colorInfoButton).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Play/pause the audio."
+});
+// $(pauseButton).tooltip({
+//   classes: {
+//     "ui-tooltip": "highlight"
+//   },
+//   show: { effect: "blind", duration: 300 },
+//   content: "Play/pause the audio."
+// });
+$(stopIntervalButton).tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Stop the audio."
+});
+$('#imageLoaderButton').tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Load your own image into the background."
+});
+$("#redVol").tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Audio level for the red channel."
+});
+$("#greenVol").tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Audio level for the green channel."
+});
+$("#blueVol").tooltip({
+  classes: {
+    "ui-tooltip": "highlight"
+  },
+  show: { effect: "blind", duration: 300 },
+  content: "Audio level for the blue channel."
+});
+// $(audioLoaders).tooltip({
+//   classes: {
+//     "ui-tooltip": "highlight"
+//   },
+//   show: { effect: "blind", duration: 300 },
+//   content: "Load your own audio into the red, green, or blue channels."
+// });
+
+
+$(clearImgButton).tooltip( enableStr );
+$(clearPaintButton).tooltip( enableStr );
+$(colorButtons).tooltip( enableStr );
+$(currentColorButton).tooltip( enableStr );
+$(stopIntervalButton).tooltip( enableStr );
+// $(pauseButton).tooltip( enableStr );
+$(colorInfoButton).tooltip( enableStr );
+// $(audioLoaders).tooltip( enableStr );
+$('#imageLoaderButton').tooltip( enableStr );
+$('#redVol').tooltip( enableStr );
+$('#greenVol').tooltip( enableStr );
+$('#blueVol').tooltip( enableStr );

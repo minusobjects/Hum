@@ -6,7 +6,11 @@
           href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow|PT+Sans|PT+Sans:700|Average+Sans|Crimson+Text|Amiri">
     </link>
     <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <link rel="stylesheet" href="./css/jquery-ui.min.css">
+    <link rel="stylesheet" href="./css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="./css/jquery-ui.theme.min.css">
     <style></style>
   </head>
 
@@ -40,12 +44,12 @@
       <div class="bottomCenter">
     <ul class="topButtons">
       <li>
-      <div id="playDiv" class="playDiv" style="display:block"><a class="grayButton button" id='colorInfoButton'><i class="fa fa-play-circle-o"></i></a></div>
-      <div id="pauseDiv" class="pauseDiv" style="display:none"><a class="grayButton button" id='pauseButton'><i class="fa fa-pause-circle-o"></i></a></div>
+      <div id="playDiv" class="playDiv" style="display:block"><a class="grayButton button" id='colorInfoButton' title="colorInfoButton"><i class="fa fa-play-circle-o"></i></a></div>
+      <div id="pauseDiv" class="pauseDiv" style="display:none"><a class="grayButton button" id='pauseButton' title="pauseButton"><i class="fa fa-pause-circle-o"></i></a></div>
       </li>
 
       <li>
-      <a class="grayButton button" id='stopIntervalButton'><i class="fa fa-stop-circle-o"></i></a>
+      <a class="grayButton button" id='stopIntervalButton' title="stopIntervalButton"><i class="fa fa-stop-circle-o"></i></a>
       </li>
 
       <li>
@@ -54,7 +58,7 @@
 
       <li>
         <label>
-          <i class="fa fa-file-image-o grayButton button"></i>
+          <i id="imageLoaderButton" title="imageLoaderButton" class="fa fa-file-image-o grayButton button"></i>
           <input type="file" id="imageLoader" name="imageLoader" style="display:none;"/>
         </label>
       </li>
@@ -85,39 +89,39 @@
       </li>
 
       <li>
-      <a class="currentColorButton" id='currentColorButton'><i class="fa fa-circle"></i></a>
+      <a class="currentColorButton" id='currentColorButton' title="currentColorButton"><i class="fa fa-circle"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorPurple'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
+      <a class='colorButton button' id='colorPurple' title='colorPurple'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorGreen'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
+      <a class='colorButton button' id='colorGreen' title='colorPurple'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorYellow'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
+      <a class='colorButton button' id='colorYellow' title='colorYellow'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorRed'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
+      <a class='colorButton button' id='colorRed' title='colorRed'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorBlue'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
+      <a class='colorButton button' id='colorBlue' title='colorBlue'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorCyan'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
+      <a class='colorButton button' id='colorCyan' title='colorCyan'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorWhite'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
+      <a class='colorButton button' id='colorWhite' title='colorWhite'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorBlack'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
+      <a class='colorButton button' id='colorBlack' title='colorBlack'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
       </li>
 
       <li>
@@ -165,22 +169,22 @@
         </div>
       </li>
       <li class="volList">
-        <div id='redVol' style="background-color:rgba(255,0,0,0); color:red;">
+        <div id='redVol' title='redVol' style="background-color:rgba(255,0,0,0); color:red;">
           R
         </div>
-        <div id='greenVol' style="background-color:rgba(0,255,0,0); color:green;">
+        <div id='greenVol' title='greenVol' style="background-color:rgba(0,255,0,0); color:green;">
           G
         </div>
-        <div id='blueVol' style="background-color:rgba(0,0,255,0); color:blue;">
+        <div id='blueVol' title='blueVol' style="background-color:rgba(0,0,255,0); color:blue;">
           B
         </div>
       </li>
       <li class="clearList">
         <div>
-          <a id='clearImgButton'>CLEAR IMAGE</a>
+          <a id='clearImgButton' title="clearImgButton">CLEAR IMAGE</a>
         </div>
         <div>
-          <a id='clearPaintButton'>CLEAR PAINT</a>
+          <a id='clearPaintButton' title="clearPaintButton">CLEAR PAINT</a>
         </div>
       </li>
       <li class="title">
@@ -198,6 +202,7 @@
   <img src="defaults/Hum_RGB_4.png" style="display:none;" id="Hum_RGB_4"/>
   </div>
   <script src="jquery-3.2.1.min.js"></script>
+  <script src="jquery-ui.min.js"></script>
   <script src="howler-dist/howler.js"></script>
   <script src="hum.js"></script>
   <!-- <script src="test_paint_2.js"></script> -->
