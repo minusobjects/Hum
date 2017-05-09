@@ -367,7 +367,7 @@ loadDefaultImage = function(){
 
 // requires server!
 // meow
-// loadDefaultImage();
+loadDefaultImage();
 
 const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
 
