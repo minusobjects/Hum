@@ -414,7 +414,24 @@ window.onload = function(){
   setTimeout(loadInstrux, 1000);
 }
 
+// all this tooltip stuff should probably be in a separate file
+
+
 let enableStr = 'enable';
+
+const toggleTipsButton = document.getElementById('toggleTipsButton');
+toggleTipsButton.addEventListener('click', toggleTips);
+
+function toggleTips(){
+  if(enableStr === 'enable'){
+    enableStr = 'disable'
+    toggleTipsButton.innerHTML = 'TURN HINTS ON';
+  } else {
+    enableStr = 'enable'
+    toggleTipsButton.innerHTML = 'TURN HINTS OFF';
+  }
+  setHints();
+}
 
 $(clearImgButton).tooltip({
   classes: {
@@ -451,13 +468,6 @@ $(colorInfoButton).tooltip({
   show: { effect: "blind", duration: 300 },
   content: "Play/pause the audio."
 });
-// $(pauseButton).tooltip({
-//   classes: {
-//     "ui-tooltip": "highlight"
-//   },
-//   show: { effect: "blind", duration: 300 },
-//   content: "Play/pause the audio."
-// });
 $(stopIntervalButton).tooltip({
   classes: {
     "ui-tooltip": "highlight"
@@ -493,13 +503,6 @@ $("#blueVol").tooltip({
   show: { effect: "blind", duration: 300 },
   content: "Audio level for the blue channel."
 });
-// $('.audioLoaderButton').tooltip({
-//   classes: {
-//     "ui-tooltip": "highlight"
-//   },
-//   show: { effect: "blind", duration: 300 },
-//   content: "Load your own audio into the red, green, or blue channels."
-// });
 $('#audio1Button').tooltip({
   classes: {
     "ui-tooltip": "highlight"
@@ -557,25 +560,16 @@ $('#blueAudioName').tooltip({
   content: "The audio currently on the blue channel."
 });
 
-// DRY this up of course
-// also, tooltip stuff should probably be in a separate file
-$(clearImgButton).tooltip( enableStr );
-$(clearPaintButton).tooltip( enableStr );
-$(colorButtons).tooltip( enableStr );
-$(currentColorButton).tooltip( enableStr );
-$(stopIntervalButton).tooltip( enableStr );
-// $(pauseButton).tooltip( enableStr );
-$(colorInfoButton).tooltip( enableStr );
-// $('.audioLoaderButton').tooltip( enableStr );
-$('#audio1Button').tooltip( enableStr );
-$('#audio2Button').tooltip( enableStr );
-$('#audio3Button').tooltip( enableStr );
-$('#imageLoaderButton').tooltip( enableStr );
-$('#redVol').tooltip( enableStr );
-$('#greenVol').tooltip( enableStr );
-$('#blueVol').tooltip( enableStr );
-$(sampleImgNumbers).tooltip( enableStr );
-$('#imageName').tooltip( enableStr );
-$('#redAudioName').tooltip( enableStr );
-$('#greenAudioName').tooltip( enableStr );
-$('#blueAudioName').tooltip( enableStr );
+const allHintButtons = [clearImgButton, clearPaintButton, colorButtons,
+currentColorButton, stopIntervalButton, colorInfoButton,
+'#audio1Button', '#audio2Button', '#audio3Button',
+'#imageLoaderButton', '#redVol', '#greenVol', '#blueVol',
+sampleImgNumbers, '#imageName', '#redAudioName', '#greenAudioName', '#blueAudioName'];
+
+function setHints(){
+  allHintButtons.forEach((button)=>{
+    $(button).tooltip(enableStr);
+  })
+}
+
+setHints();
