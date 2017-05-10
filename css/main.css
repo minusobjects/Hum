@@ -205,3 +205,16 @@ ul {
   z-index:42;
   position:relative;
 }
+
+.ui-tooltip{
+  padding: 10px 20px;
+  color: white;
+  box-shadow: 0 0 2px #666;
+  background-image: none;
+  background: bisque !important;
+  border-radius:8px;
+}
+.ui-tooltip-content{
+  color: #666;
+  font-family: 'PT Sans', 'Univers', 'Arial', sans-serif;"
+}
