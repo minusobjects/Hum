@@ -27,14 +27,14 @@ $(clearImgButton).tooltip({
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
-  content: "Clear the image, but not the paint."
+  content: "Clear the background image, but not the paint."
 });
 $(clearPaintButton).tooltip({
   classes: {
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
-  content: "Clear the paint, but not the image."
+  content: "Clear the paint, but not the background image."
 });
 $(currentColorButton).tooltip({
   classes: {
@@ -69,7 +69,7 @@ $('#imageLoaderButton').tooltip({
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
-  content: "Load your own image into the background."
+  content: "Load your own image (PNG or JPG) into the background."
 });
 $("#redVol").tooltip({
   classes: {
@@ -97,21 +97,21 @@ $('#audio1Button').tooltip({
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
-  content: "Load your own audio into the red channel."
+  content: "Load your own audio (MP3 or WAV) into the red channel."
 });
 $('#audio2Button').tooltip({
   classes: {
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
-  content: "Load your own audio into the green channel."
+  content: "Load your own audio (MP3 or WAV) into the green channel."
 });
 $('#audio3Button').tooltip({
   classes: {
     "ui-tooltip": "highlight"
   },
   show: { duration: 300 },
-  content: "Load your own audio into the blue channel."
+  content: "Load your own audio (MP3 or WAV) into the blue channel."
 });
 $(sampleImgNumbers).tooltip({
   classes: {
