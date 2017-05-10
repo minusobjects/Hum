@@ -54,7 +54,7 @@
       </li>
 
       <li>
-        <div class="pipeDiv">|</div>
+        <div class="pipeDiv"></div>
       </li>
 
       <li>
@@ -86,7 +86,33 @@
       </li>
 
       <li>
-        <div class="pipeDiv">|</div>
+        <div class="pipeDiv"></div>
+      </li>
+
+      <li>
+        <div id='redVol' title='redVol' style="background-color:rgba(255,0,0,0); color:red;">
+          <svg height="26px" width="26px">
+            <circle id='redVolCircle' cx="13" cy="13" r="12" stroke="red" stroke-width="1px" fill="none" />
+          </svg>
+        </div>
+      </li>
+      <li>
+        <div id='greenVol' title='greenVol' style="background-color:rgba(0,255,0,0); color:green;">
+          <svg height="26px" width="26px">
+            <circle id='greenVolCircle' cx="13" cy="13" r="12" stroke="green" stroke-width="1px" fill="none" />
+          </svg>
+        </div>
+      </li>
+      <li>
+        <div id='blueVol' title='blueVol' style="background-color:rgba(0,0,255,0); color:blue;">
+          <svg height="26px" width="26px">
+            <circle id='blueVolCircle' cx="13" cy="13" r="12" stroke="blue" stroke-width="1px" fill="none" />
+          </svg>
+        </div>
+      </li>
+
+      <li>
+        <div class="pipeDiv"></div>
       </li>
 
       <li>
@@ -94,41 +120,53 @@
       </li>
 
       <li>
-      <a class='colorButton button' id='colorPurple' title='colorPurple'><i class="fa fa-dot-circle-o" style="color:purple"></i></a>
+      <div class='colorButton' id='colorPurple' title='colorPurple' style="background-color:purple"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorGreen' title='colorPurple'><i class="fa fa-dot-circle-o" style="color:green"></i></a>
+      <div class='colorButton' id='colorGreen' title='colorGreen' style="background-color:green"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorYellow' title='colorYellow'><i class="fa fa-dot-circle-o" style="color:yellow"></i></a>
+      <div class='colorButton' id='colorYellow' title='colorYellow' style="background-color:yellow"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorRed' title='colorRed'><i class="fa fa-dot-circle-o" style="color:red"></i></a>
+      <div class='colorButton' id='colorRed' title='colorRed' style="background-color:red"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorBlue' title='colorBlue'><i class="fa fa-dot-circle-o" style="color:blue"></i></a>
+      <div class='colorButton' id='colorBlue' title='colorBlue' style="background-color:blue"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorCyan' title='colorCyan'><i class="fa fa-dot-circle-o" style="color:cyan"></i></a>
+      <div class='colorButton' id='colorCyan' title='colorCyan' style="background-color:cyan"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorWhite' title='colorWhite'><i class="fa fa-dot-circle-o" style="color:white"></i></a>
+      <div class='colorButton' id='colorWhite' title='colorWhite' style="background-color:white"></div>
       </li>
 
       <li>
-      <a class='colorButton button' id='colorBlack' title='colorBlack'><i class="fa fa-dot-circle-o" style="color:black"></i></a>
+      <div class='colorButton' id='colorBlack' title='colorBlack' style="background-color:black"></div>
       </li>
 
       <li>
-        <div class="pipeDiv">|</div>
+        <div class="pipeDiv"></div>
       </li>
 
+      <li>
+      <a class="button grayButton" id='instruxButton'><i class="fa fa-question-circle-o"></i></a>
+      </li>
+
+      <li>
+        <div class="wordButton" style="min-width:120px;">
+          <a id='toggleTipsButton' title="toggleTipsButton">TURN HINTS OFF</a>
+        </div>
+      </li>
+    </ul>
+    <br/>
+    <ul class="middleButtons">
       <li>
         <div class="textButton"><a class='sampleImgNumber' id='sampleRGB1' title='sampleRGB1' data=0>1</a></div>
       </li>
@@ -146,14 +184,9 @@
       </li>
 
       <li>
-        <div class="pipeDiv">|</div>
-      </li>
-
-      <li>
-      <a class="button grayButton" id='instruxButton'><i class="fa fa-question-circle-o"></i></a>
+        <div class="pipeDiv"></div>
       </li>
     </ul>
-    <br/>
     <ul class="bottomButtons">
       <li class="fileList">
         <div id='imageName' title='imageName'>
@@ -169,26 +202,12 @@
           Current blue
         </div>
       </li>
-      <li class="volList">
-        <div id='redVol' title='redVol' style="background-color:rgba(255,0,0,0); color:red;">
-          R
-        </div>
-        <div id='greenVol' title='greenVol' style="background-color:rgba(0,255,0,0); color:green;">
-          G
-        </div>
-        <div id='blueVol' title='blueVol' style="background-color:rgba(0,0,255,0); color:blue;">
-          B
-        </div>
-      </li>
       <li class="clearList">
-        <div>
+        <div class="wordButton" style="min-width:120px;">
           <a id='clearImgButton' title="clearImgButton">CLEAR IMAGE</a>
         </div>
-        <div>
+        <div class="wordButton" style="min-width:120px;">
           <a id='clearPaintButton' title="clearPaintButton">CLEAR PAINT</a>
-        </div>
-        <div>
-          <a id='toggleTipsButton' title="toggleTipsButton">TURN HINTS OFF</a>
         </div>
       </li>
       <li class="title">

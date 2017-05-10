@@ -102,8 +102,18 @@ ul {
   text-align:center;
 }
 .topButtons{
+  width:750px;
+  margin: 0 auto;
+  margin-top: 30px;
   display:flex;
   justify-content: space-between;
+  padding-left:20px;
+  padding-right:20px;
+}
+.middleButtons{
+  margin-top:-18px;
+  display:flex;
+  justify-content:flex-start;
   padding-left:20px;
   padding-right:20px;
 }
@@ -119,7 +129,8 @@ ul {
 }
 .button{
   height:40px;
-  font-size:40px;
+  /*font-size:40px;*/
+  font-size:32px;
   cursor: pointer;
   opacity:.7;
 }
@@ -134,7 +145,8 @@ ul {
   color:#555;
   margin-top:4px;
   height:40px;
-  font-size:30px;
+  /*font-size:30px;*/
+  font-size:24px;
   cursor: pointer;
   opacity:.7;
 }
@@ -145,16 +157,47 @@ ul {
   opacity:1;
   color:orange;
 }
+.wordButton{
+  border: 1px solid #555;
+  border-radius: 20px;
+  text-align: center;
+  color:#555;
+  margin-top:2px;
+  padding-top: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  height:24px;
+  /*letter-spacing: .06em;*/
+  /*font-size:30px;*/
+  font-size:16px;
+  cursor: pointer;
+  opacity:.8;
+}
+.wordButton:hover{
+  opacity:1;
+}
+.wordButton:active{
+  opacity:1;
+  color:orange;
+}
 .currentColorButton{
   height:40px;
-  font-size:40px;
+  /*font-size:40px;*/
+  font-size:32px;
+}
+.colorButton{
+  margin-top:4px;
+  width:13px;
+  height:27px;
 }
 .pipeDiv{
   margin-top: -2px;
-  color:#555;
+  /*color:#555;*/
+  background-color:#555;
   opacity:.7;
   height:40px;
-  font-size:36px;
+  /*font-size:36px;*/
+  width:1px;
 }
 .fileList{
   margin-right:20px;

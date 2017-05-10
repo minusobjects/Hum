@@ -104,9 +104,9 @@ function getColorInfo(x_coord){
   soundObj['audio2'].volume(greenSum/halfMax);
   soundObj['audio3'].volume(blueSum/halfMax);
 
-  document.getElementById("redVol").setAttribute(`style`, `background-color:rgba(255,0,0,${redSum/halfMax});color:red;`);
-  document.getElementById("greenVol").setAttribute(`style`, `background-color:rgba(0,255,0,${greenSum/halfMax});color:green;`);
-  document.getElementById("blueVol").setAttribute(`style`, `background-color:rgba(0,0,255,${blueSum/halfMax});color:blue`);
+  document.getElementById("redVolCircle").setAttribute(`fill`, `rgba(255,0,0,${redSum/halfMax})`);
+  document.getElementById("greenVolCircle").setAttribute(`fill`, `rgba(0,255,0,${greenSum/halfMax})`);
+  document.getElementById("blueVolCircle").setAttribute(`fill`, `rgba(0,0,255,${blueSum/halfMax})`);
 }
 
 const stopIntervalButton = document.getElementById('stopIntervalButton');
@@ -410,9 +410,9 @@ function setAudioNames(){
 }
 
 window.onload = function(){
-  // meow
   setHints();
-  setTimeout(loadInstrux, 500);
+  // meow
+  // setTimeout(loadInstrux, 500);
 }
 
 // all this tooltip stuff should probably be in a separate file
