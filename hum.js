@@ -152,22 +152,37 @@ function pauseAll(){
   soundObj['audio3'].pause();
 }
 
+let errorMessage = '';
+
+function setErrors(){
+  document.getElementById('errors').innerHTML = errorMessage;
+}
+
 function handleAudio(e){
+  errorMessage = ''
+  let filename = e.target.files[0].name
+  let ext = filename.substr(filename.lastIndexOf('.')+1);
+  if(ext.toLowerCase() !== 'mp3' && ext.toLowerCase() !== 'wav'){
+    errorMessage = 'Audio file must be WAV or MP3.';
+    setErrors();
+    return null;
+  }
 
-    let audioId = e.currentTarget.id;
+  let audioId = e.currentTarget.id;
 
-    let reader = new FileReader();
-    reader.onload = function(event){
-      howl = new Howl({
-        preload: true,
-        volume: 0,
-        src: [event.target.result],
-      });
-      soundObj[audioId] = howl;
-      setAudioNames();
-    }
-    audioNames[audioId] = e.target.files[0].name;
-    reader.readAsDataURL(e.target.files[0]);
+  let reader = new FileReader();
+  reader.onload = function(event){
+    howl = new Howl({
+      preload: true,
+      volume: 0,
+      src: [event.target.result],
+    });
+    soundObj[audioId] = howl;
+    setErrors();
+    setAudioNames();
+  }
+  audioNames[audioId] = filename;
+  reader.readAsDataURL(e.target.files[0]);
 }
 
 const imageLoader = document.getElementById('imageLoader');
@@ -177,17 +192,27 @@ imageLoader.addEventListener('change', handleImage, false);
 let currentImgName;
 
 function handleImage(e){
+  errorMessage = ''
+  let filename = e.target.files[0].name
+  let ext = filename.substr(filename.lastIndexOf('.')+1);
+  if(ext.toLowerCase() !== 'png' && ext.toLowerCase() !== 'jpg' && ext.toLowerCase() !== 'jpeg'){
+    errorMessage = 'Image file must be PNG or JPG.';
+    setErrors();
+    return null;
+  }
+
     let reader = new FileReader();
     reader.onload = function(event){
       let img = new Image();
       img.onload = function(){
         currentImg = img;
         setImageName()
+        setErrors();
         redraw();
       }
       img.src = event.target.result;
     }
-    currentImgName = e.target.files[0].name;
+    currentImgName = filename;
     reader.readAsDataURL(e.target.files[0]);
 }
 

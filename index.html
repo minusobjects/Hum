@@ -25,7 +25,7 @@
         <br/><br/>
         When you play the audio, the levels of the three audio tracks will change based on the amounts of <span style="color:red">red,</span> <span style="color:green">green</span> and <span style="color:blue">blue</span> (respectively) in the central canvas (note: on a computer screen, all images are made-up of <span style="color:red">red,</span> <span style="color:green">green</span> and <span style="color:blue">blue</span>).
         <br/><br/>
-        Click the file buttons to load your own audio files and/or background image. Or just use the preloaded samples.
+        Click the file buttons to load your own audio files and/or background image. Or, just use the preloaded samples.
         <br/><br/>
         Add color by selecting from the palette and then 'painting' on the canvas.
         <br/><br/>
@@ -246,22 +246,37 @@
     <div class="HRdiv">
       <hr class="middleHR">
     </div>
-    <ul class="bottomButtons">
-      <li class="fileList">
-        <div id='imageName' title='imageName'>
+    <div class="bottomButtons">
+    <table class="filesTable" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>
+        <div id='imageName' title='imageName' class='nameDiv td-top' style="color:#777;">
           (none)
         </div>
-        <div id='redAudioName' title='redAudioName' style="color:red;">
+      </td>
+      <td>
+        <div id='redAudioName' title='redAudioName' class='nameDiv td-top td-right' style="color:red;">
           Current red
         </div>
-        <div id='greenAudioName' title='greenAudioName' style="color:green;">
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id='greenAudioName' title='greenAudioName' class='nameDiv' style="color:green;">
           Current green
         </div>
-        <div id='blueAudioName' title='blueAudioName' style="color:blue;">
+      </td>
+      <td>
+        <div id='blueAudioName' title='blueAudioName' class='nameDiv td-right' style="color:blue;">
           Current blue
         </div>
-      </li>
-    </ul>
+      </td>
+    </tr>
+  </table>
+  <div id="errors" class="errorsDiv">
+
+  </div>
+  </div>
     <div class="titleDiv">
     </div>
     <div class="borderDiv">
