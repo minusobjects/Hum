@@ -109,13 +109,20 @@ ul {
   justify-content: space-between;
   padding-left:20px;
   padding-right:20px;
+  padding-bottom: 4px;
+  border-bottom: 2px solid rgba(85,85,85,.7);
 }
 .middleButtons{
   margin-top:-18px;
   display:flex;
-  justify-content:flex-start;
+  justify-content: space-between;
   padding-left:20px;
   padding-right:20px;
+  padding-bottom: 4px;
+  width:750px;
+  margin: 0 auto;
+  margin-top: 10px;
+  /*border-bottom: 2px solid rgba(85,85,85,.7);*/
 }
 .bottomButtons{
   margin-top:-18px;
@@ -126,6 +133,13 @@ ul {
 }
 .grayButton{
   color: #555;
+}
+.staticButton{
+  color: #666;
+  height:40px;
+  font-size:26px;
+  opacity:.7;
+  padding-top:3px;
 }
 .button{
   height:40px;
@@ -162,14 +176,14 @@ ul {
   border-radius: 20px;
   text-align: center;
   color:#555;
-  margin-top:2px;
+  margin-top:4px;
   padding-top: 4px;
   padding-left: 8px;
   padding-right: 8px;
-  height:24px;
+  height:22px;
   /*letter-spacing: .06em;*/
   /*font-size:30px;*/
-  font-size:16px;
+  font-size:15px;
   cursor: pointer;
   opacity:.8;
 }
@@ -183,15 +197,25 @@ ul {
 .currentColorButton{
   height:40px;
   /*font-size:40px;*/
-  font-size:32px;
+  font-size:31px;
 }
 .colorButton{
   margin-top:4px;
   width:13px;
   height:27px;
+  cursor:pointer;
+  opacity:.5;
+}
+.colorButton:hover{
+  opacity:1;
+}
+.colorButton:active{
+  opacity:1;
 }
 .pipeDiv{
   margin-top: -2px;
+  margin-left:2px;
+  margin-right:2px;
   /*color:#555;*/
   background-color:#555;
   opacity:.7;

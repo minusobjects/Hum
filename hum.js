@@ -324,12 +324,13 @@ let sampleRGB1 = document.getElementById("Hum_RGB_1");
 let sampleRGB2 = document.getElementById("Hum_RGB_2");
 let sampleRGB3 = document.getElementById("Hum_RGB_3");
 let sampleRGB4 = document.getElementById("Hum_RGB_4");
+let sampleRGB5 = document.getElementById("Hum_RGB_5");
 
-let sampleImgSelect = [false, false, false, false];
+let sampleImgSelect = [false, false, false, false, false];
 
 loadDefaultImage = function(){
     let pickedImg;
-    let rand = Math.floor((Math.random() * 4) + 1);
+    let rand = Math.floor((Math.random() * 5) + 1);
     switch (rand){
       case 1:
         pickedImg = sampleRGB1;
@@ -351,6 +352,11 @@ loadDefaultImage = function(){
         currentImgName = 'Hum_RGB_4.png';
         sampleImgSelect[3] = true;
         break;
+      case 5:
+        pickedImg = sampleRGB5;
+        currentImgName = 'Hum_RGB_5.png';
+        sampleImgSelect[4] = true;
+        break;
       default:
         pickedImg = sampleRGB1;
         currentImgName = 'Hum_RGB_1.png';
@@ -364,10 +370,6 @@ loadDefaultImage = function(){
       redraw();
     }
 }
-
-// requires server!
-// meow
-// loadDefaultImage();
 
 const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
 
@@ -409,166 +411,12 @@ function setAudioNames(){
   document.getElementById("blueAudioName").innerHTML = audioNames['audio3'];
 }
 
+// meow
+// requires server!
+// loadDefaultImage();
+
 window.onload = function(){
   setHints();
   // meow
   // setTimeout(loadInstrux, 500);
-}
-
-// all this tooltip stuff should probably be in a separate file
-
-
-let enableStr = 'enable';
-
-const toggleTipsButton = document.getElementById('toggleTipsButton');
-toggleTipsButton.addEventListener('click', toggleTips);
-
-function toggleTips(){
-  if(enableStr === 'enable'){
-    enableStr = 'disable'
-    toggleTipsButton.innerHTML = 'TURN HINTS ON';
-  } else {
-    enableStr = 'enable'
-    toggleTipsButton.innerHTML = 'TURN HINTS OFF';
-  }
-  setHints();
-}
-
-$(clearImgButton).tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Clear the image, but not the paint."
-});
-$(clearPaintButton).tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Clear the paint, but not the image."
-});
-$(currentColorButton).tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Current paint color."
-});
-$(colorButtons).tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Choose a color to paint with."
-});
-$(colorInfoButton).tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Play/pause the audio."
-});
-$(stopIntervalButton).tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Stop the audio."
-});
-$('#imageLoaderButton').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Load your own image into the background."
-});
-$("#redVol").tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Audio level for the red channel."
-});
-$("#greenVol").tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Audio level for the green channel."
-});
-$("#blueVol").tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Audio level for the blue channel."
-});
-$('#audio1Button').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Load your own audio into the red channel."
-});
-$('#audio2Button').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Load your own audio into the green channel."
-});
-$('#audio3Button').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Load your own audio into the blue channel."
-});
-$(sampleImgNumbers).tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "Load one of the sample images into the background."
-});
-$('#imageName').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "The current background image."
-});
-$('#redAudioName').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "The audio currently on the red channel."
-});
-$('#greenAudioName').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "The audio currently on the green channel."
-});
-$('#blueAudioName').tooltip({
-  classes: {
-    "ui-tooltip": "highlight"
-  },
-  show: { duration: 300 },
-  content: "The audio currently on the blue channel."
-});
-
-const allHintButtons = [clearImgButton, clearPaintButton, colorButtons,
-currentColorButton, stopIntervalButton, colorInfoButton,
-'#audio1Button', '#audio2Button', '#audio3Button',
-'#imageLoaderButton', '#redVol', '#greenVol', '#blueVol',
-sampleImgNumbers, '#imageName', '#redAudioName', '#greenAudioName', '#blueAudioName'];
-
-function setHints(){
-  allHintButtons.forEach((button)=>{
-    $(button).tooltip(enableStr);
-  })
 }
