@@ -38,8 +38,6 @@ audioNames['audio1'] = '150.wav';
 audioNames['audio2'] = '300.wav';
 audioNames['audio3'] = '440.wav';
 
-setAudioNames();
-
 let setInt;
 let current_x = 0;
 
@@ -388,8 +386,6 @@ function readySampleImgNumbers(){
   });
 }
 
-readySampleImgNumbers();
-
 function setSampleImgNumber(){
   Array.prototype.forEach.call(sampleImgNumbers, (imgNumber) =>{
     let n = parseInt(imgNumber.attributes.data.value);
@@ -416,7 +412,9 @@ function setAudioNames(){
 // loadDefaultImage();
 
 window.onload = function(){
+  setAudioNames();
   setHints();
+  readySampleImgNumbers();
   // meow
   // setTimeout(loadInstrux, 500);
 }
