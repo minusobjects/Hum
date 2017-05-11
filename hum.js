@@ -8,35 +8,43 @@ const ctx = canvasEl.getContext('2d');
 
 const bar = document.getElementById("bar");
 
-// load default audio - seems to work fine with multiple files
-// BUT having CORS errors locally...
-let defaultHowl1 = new Howl({
-  preload: true,
-  volume: 0,
-  src: 'defaults/440.wav'
-});
-
-let defaultHowl2 = new Howl({
-  preload: true,
-  volume: 0,
-  src: 'defaults/300.wav'
-});
-
-let defaultHowl3 = new Howl({
-  preload: true,
-  volume: 0,
-  src: 'defaults/150.wav'
-});
-
 let soundObj = {};
-soundObj['audio1'] = defaultHowl1;
-soundObj['audio2'] = defaultHowl2;
-soundObj['audio3'] = defaultHowl3;
-
 let audioNames = {};
-audioNames['audio1'] = '150.wav';
-audioNames['audio2'] = '300.wav';
-audioNames['audio3'] = '440.wav';
+
+function loadSampleHowls(num){
+  const sampleHowls = {
+    1:['Tone_Red.wav','Tone_Green.wav','Tone_Blue.wav'],
+    2:['Beat_Red.wav','Beat_Green.wav','Beat_Blue.wav'],
+    3:['Jazz_Red.wav','Jazz_Green.wav','Jazz_Blue.wav'],
+    4:['Choir_Red.wav','Choir_Green.wav','Choir_Blue.wav']
+  };
+
+  let defaultHowl1 = new Howl({
+    preload: true,
+    volume: 0,
+    src: `defaults/${sampleHowls[num][0]}`
+  });
+
+  let defaultHowl2 = new Howl({
+    preload: true,
+    volume: 0,
+    src: `defaults/${sampleHowls[num][1]}`
+  });
+
+  let defaultHowl3 = new Howl({
+    preload: true,
+    volume: 0,
+    src: `defaults/${sampleHowls[num][2]}`
+  });
+
+  soundObj['audio1'] = defaultHowl1;
+  soundObj['audio2'] = defaultHowl2;
+  soundObj['audio3'] = defaultHowl3;
+
+  audioNames['audio1'] = sampleHowls[num][0];
+  audioNames['audio2'] = sampleHowls[num][1];
+  audioNames['audio3'] = sampleHowls[num][2];
+}
 
 let setInt;
 let current_x = 0;
@@ -437,6 +445,7 @@ function setAudioNames(){
 // loadDefaultImage();
 
 window.onload = function(){
+  loadSampleHowls(1);
   setAudioNames();
   setHints();
   readySampleImgNumbers();
