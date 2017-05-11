@@ -13,10 +13,10 @@ let audioNames = {};
 
 function loadSampleHowls(num){
   const sampleHowls = {
-    1:['Tone_Red.wav','Tone_Green.wav','Tone_Blue.wav'],
-    2:['Beat_Red.wav','Beat_Green.wav','Beat_Blue.wav'],
-    3:['Jazz_Red.wav','Jazz_Green.wav','Jazz_Blue.wav'],
-    4:['Choir_Red.wav','Choir_Green.wav','Choir_Blue.wav']
+    0:['Tone_Red.mp3','Tone_Green.mp3','Tone_Blue.mp3'],
+    1:['Beat_Red.mp3','Beat_Green.mp3','Beat_Blue.mp3'],
+    2:['Jazz_Red.mp3','Jazz_Green.mp3','Jazz_Blue.mp3'],
+    3:['Choir_Red.mp3','Choir_Green.mp3','Choir_Blue.mp3']
   };
 
   let defaultHowl1 = new Howl({
@@ -44,6 +44,10 @@ function loadSampleHowls(num){
   audioNames['audio1'] = sampleHowls[num][0];
   audioNames['audio2'] = sampleHowls[num][1];
   audioNames['audio3'] = sampleHowls[num][2];
+
+  sampleAudSelect = [false,false,false,false];
+  sampleAudSelect[num] = true;
+  setSampleAudNumber();
 }
 
 let setInt;
@@ -358,6 +362,7 @@ let sampleRGB4 = document.getElementById("Hum_RGB_4");
 let sampleRGB5 = document.getElementById("Hum_RGB_5");
 
 let sampleImgSelect = [false, false, false, false, false];
+let sampleAudSelect = [false, false, false, false];
 
 loadDefaultImage = function(){
     let pickedImg;
@@ -430,6 +435,32 @@ function setSampleImgNumber(){
   });
 }
 
+const sampleAudNumbers = document.getElementsByClassName('sampleAudNumber');
+
+function readySampleAudNumbers(){
+  Array.prototype.forEach.call(sampleAudNumbers, (audNumber) => {
+    audNumber.addEventListener('click', (e) => {
+      stopInterval();
+      sampleAudSelect = [false, false, false, false];
+      let n = parseInt(e.currentTarget.attributes.data.value);
+      loadSampleHowls(n);
+      sampleAudSelect[n] = true;
+      setSampleAudNumber();
+    });
+  });
+}
+
+function setSampleAudNumber(){
+  Array.prototype.forEach.call(sampleAudNumbers, (audNumber) =>{
+    let n = parseInt(audNumber.attributes.data.value);
+    if(sampleAudSelect[n] === true){
+      audNumber.setAttribute(`style`, `color:white;`);
+    } else {
+      audNumber.setAttribute(`style`, `color:default;`);
+    }
+  });
+}
+
 function setImageName(){
   document.getElementById("imageName").innerHTML = currentImgName;
 }
@@ -445,10 +476,11 @@ function setAudioNames(){
 // loadDefaultImage();
 
 window.onload = function(){
-  loadSampleHowls(1);
+  readySampleImgNumbers();
+  readySampleAudNumbers();
+  loadSampleHowls(0);
   setAudioNames();
   setHints();
-  readySampleImgNumbers();
   // meow
   // setTimeout(loadInstrux, 500);
 }
