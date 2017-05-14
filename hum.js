@@ -500,5 +500,6 @@ window.onload = function(){
   loadSampleHowls(0);
   setAudioNames();
   setHints();
+  document.getElementById("loadingAnim").setAttribute(`style`, `display:none;`);
   setTimeout(loadInstrux, 500);
 }
