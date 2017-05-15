@@ -10,7 +10,7 @@ function setErrors(){
 }
 
 // requires server
-// loadDefaultImage();
+loadDefaultImage();
 
 window.onload = function(){
   readySampleImgNumbers();
