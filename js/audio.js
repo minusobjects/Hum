@@ -117,3 +117,30 @@ function setPlayButton(){
   document.getElementById("pauseDiv").setAttribute(`style`, `display:none;`);
   document.getElementById("playDiv").setAttribute(`style`, `display:block;`);
 }
+
+
+const sampleAudNumbers = document.getElementsByClassName('sampleAudNumber');
+
+function readySampleAudNumbers(){
+  Array.prototype.forEach.call(sampleAudNumbers, (audNumber) => {
+    audNumber.addEventListener('click', (e) => {
+      stopInterval();
+      sampleAudSelect = [false, false, false, false];
+      let n = parseInt(e.currentTarget.attributes.data.value);
+      loadSampleHowls(n);
+      sampleAudSelect[n] = true;
+      setSampleAudNumber();
+    });
+  });
+}
+
+function setSampleAudNumber(){
+  Array.prototype.forEach.call(sampleAudNumbers, (audNumber) =>{
+    let n = parseInt(audNumber.attributes.data.value);
+    if(sampleAudSelect[n] === true){
+      audNumber.setAttribute(`style`, `color:white;`);
+    } else {
+      audNumber.setAttribute(`style`, `color:default;`);
+    }
+  });
+}
