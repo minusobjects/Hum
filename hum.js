@@ -8,49 +8,6 @@ const ctx = canvasEl.getContext('2d');
 
 const bar = document.getElementById("bar");
 
-let soundObj = {};
-let audioNames = {};
-
-function loadSampleHowls(num){
-  const sampleHowls = {
-    0:['Tone_Red.mp3','Tone_Green.mp3','Tone_Blue.mp3'],
-    1:['Beat_Red.mp3','Beat_Green.mp3','Beat_Blue.mp3'],
-    2:['Jazz_Red.mp3','Jazz_Green.mp3','Jazz_Blue.mp3'],
-    3:['Choir_Red.mp3','Choir_Green.mp3','Choir_Blue.mp3']
-  };
-
-  let defaultHowl1 = new Howl({
-    preload: true,
-    volume: 0,
-    src: `defaults/${sampleHowls[num][0]}`
-  });
-
-  let defaultHowl2 = new Howl({
-    preload: true,
-    volume: 0,
-    src: `defaults/${sampleHowls[num][1]}`
-  });
-
-  let defaultHowl3 = new Howl({
-    preload: true,
-    volume: 0,
-    src: `defaults/${sampleHowls[num][2]}`
-  });
-
-  soundObj['audio1'] = defaultHowl1;
-  soundObj['audio2'] = defaultHowl2;
-  soundObj['audio3'] = defaultHowl3;
-
-  audioNames['audio1'] = sampleHowls[num][0];
-  audioNames['audio2'] = sampleHowls[num][1];
-  audioNames['audio3'] = sampleHowls[num][2];
-
-  sampleAudSelect = [false,false,false,false];
-  sampleAudSelect[num] = true;
-  setSampleAudNumber();
-  setAudioNames();
-}
-
 let setInt;
 let current_x = 0;
 
@@ -59,10 +16,16 @@ let currentImg;
 const colorInfoButton = document.getElementById('colorInfoButton');
 colorInfoButton.addEventListener('click', colorTimeline, false);
 
+const stopIntervalButton = document.getElementById('stopIntervalButton');
+stopIntervalButton.addEventListener('click', stopInterval, false);
+
+const pauseButton = document.getElementById('pauseButton');
+pauseButton.addEventListener('click', pauseInterval, false);
+
 function colorTimeline(){
-  let aud1Dur = soundObj['audio1'].duration();
-  let aud2Dur = soundObj['audio2'].duration();
-  let aud3Dur = soundObj['audio3'].duration();
+  let aud1Dur = soundObj['red'].duration();
+  let aud2Dur = soundObj['green'].duration();
+  let aud3Dur = soundObj['blue'].duration();
 
   let shortestDur = Math.min(aud1Dur, aud2Dur, aud3Dur);
   let millies = (shortestDur / canvasEl.width) * 1000;
@@ -81,29 +44,26 @@ function colorTimeline(){
     playAll();
 }
 
-function setPauseButton(){
-  document.getElementById("pauseDiv").setAttribute(`style`, `display:block;`);
-  document.getElementById("playDiv").setAttribute(`style`, `display:none;`);
-}
 
-function setPlayButton(){
-  document.getElementById("pauseDiv").setAttribute(`style`, `display:none;`);
-  document.getElementById("playDiv").setAttribute(`style`, `display:block;`);
+function sumMaxOne(colorSum,max){
+  if(colorSum/max >= 1){
+    colorSum = 1;
+  } else {
+    colorSum = colorSum/max;
+  }
+  return colorSum;
 }
-
-let pixelInfo;
-let redSum;
-let greenSum;
-let blueSum;
-let alphaSum;
-let max = canvasEl.height * 255;
-let halfMax = max / 2;
 
 function getColorInfo(x_coord){
+  let pixelInfo;
+  let redSum = 0;
+  let greenSum = 0;
+  let blueSum = 0;
+  let alphaSum;
+  let max = canvasEl.height * 255;
+  let halfMax = max / 2;
+
   pixelInfo = ctx.getImageData(x_coord+2,0,1,canvasEl.height);
-  redSum = 0;
-  greenSum = 0;
-  blueSum = 0;
 
   for (let i = 0; i < pixelInfo.data.length; i = i + 4) {
     redSum = redSum + pixelInfo.data[i];
@@ -111,77 +71,26 @@ function getColorInfo(x_coord){
     blueSum = blueSum + pixelInfo.data[i+2];
   }
 
-  if(redSum/halfMax >= 1){
-    redSum = 1;
-  } else {
-    redSum = redSum/halfMax;
-  }
+  redSum = sumMaxOne(redSum,halfMax);
+  greenSum = sumMaxOne(greenSum,halfMax);
+  blueSum = sumMaxOne(blueSum,halfMax);
 
-  if(greenSum/halfMax >= 1){
-    greenSum = 1;
-  } else {
-    greenSum = greenSum/halfMax;
-  }
+  assignVolume(redSum,greenSum,blueSum);
+  showLevels(redSum,greenSum,blueSum);
+}
 
-  if(blueSum/halfMax >= 1){
-    blueSum = 1;
-  } else {
-    blueSum = blueSum/halfMax;
-  }
+function assignVolume(redSum,greenSum,blueSum){
+  soundObj['red'].volume(redSum);
+  soundObj['green'].volume(greenSum);
+  soundObj['blue'].volume(blueSum);
+}
 
-  soundObj['audio1'].volume(redSum);
-  soundObj['audio2'].volume(greenSum);
-  soundObj['audio3'].volume(blueSum);
-
+function showLevels(redSum,greenSum,blueSum){
   document.getElementById("redVolCircle").setAttribute(`fill`, `rgba(255,0,0,${redSum})`);
   document.getElementById("greenVolCircle").setAttribute(`fill`, `rgba(0,255,0,${greenSum})`);
   document.getElementById("blueVolCircle").setAttribute(`fill`, `rgba(0,0,255,${blueSum})`);
 }
 
-const stopIntervalButton = document.getElementById('stopIntervalButton');
-stopIntervalButton.addEventListener('click', stopInterval, false);
-
-function stopInterval(){
-  stopAll();
-  window.clearInterval(setInt);
-  bar.style.marginLeft = `0px`;
-  bar.style.display = `none`;
-  redraw();
-  current_x = 0;
-  setPlayButton()
-}
-
-const audioLoaders = document.getElementsByClassName('audioLoader');
-Array.prototype.forEach.call(audioLoaders, (loader) =>{
-  loader.addEventListener('change', handleAudio, false);
-});
-
-const pauseButton = document.getElementById('pauseButton');
-pauseButton.addEventListener('click', pauseInterval, false);
-
-function pauseInterval(){
-  pauseAll();
-  window.clearInterval(setInt);
-  setPlayButton();
-}
-
-function playAll(){
-  soundObj['audio1'].play();
-  soundObj['audio2'].play();
-  soundObj['audio3'].play();
-}
-
-function stopAll(){
-  soundObj['audio1'].stop();
-  soundObj['audio2'].stop();
-  soundObj['audio3'].stop();
-}
-
-function pauseAll(){
-  soundObj['audio1'].pause();
-  soundObj['audio2'].pause();
-  soundObj['audio3'].pause();
-}
 
 let errorMessage = '';
 
@@ -189,32 +98,7 @@ function setErrors(){
   document.getElementById('errors').innerHTML = errorMessage;
 }
 
-function handleAudio(e){
-  errorMessage = ''
-  let filename = e.target.files[0].name
-  let ext = filename.substr(filename.lastIndexOf('.')+1);
-  if(ext.toLowerCase() !== 'mp3' && ext.toLowerCase() !== 'wav'){
-    errorMessage = 'Audio file must be WAV or MP3.';
-    setErrors();
-    return null;
-  }
 
-  let audioId = e.currentTarget.id;
-
-  let reader = new FileReader();
-  reader.onload = function(event){
-    howl = new Howl({
-      preload: true,
-      volume: 0,
-      src: [event.target.result],
-    });
-    soundObj[audioId] = howl;
-    setErrors();
-    setAudioNames();
-  }
-  audioNames[audioId] = filename;
-  reader.readAsDataURL(e.target.files[0]);
-}
 
 const imageLoader = document.getElementById('imageLoader');
 imageLoader.onclick = function(){this.value = null;};
@@ -350,7 +234,6 @@ function clearPaint(){
 }
 
 function redraw(){
-  // ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clears the canvas
   if(currentImg){
     ctx.drawImage(currentImg,0,0,1000,600);
   } else {
@@ -374,16 +257,16 @@ function redraw(){
   }
 }
 
-let sampleRGB1 = document.getElementById("Hum_RGB_1");
-let sampleRGB2 = document.getElementById("Hum_RGB_2");
-let sampleRGB3 = document.getElementById("Hum_RGB_3");
-let sampleRGB4 = document.getElementById("Hum_RGB_4");
-let sampleRGB5 = document.getElementById("Hum_RGB_5");
-
 let sampleImgSelect = [false, false, false, false, false];
 let sampleAudSelect = [false, false, false, false];
 
 loadDefaultImage = function(){
+    const sampleRGB1 = document.getElementById("Hum_RGB_1");
+    const sampleRGB2 = document.getElementById("Hum_RGB_2");
+    const sampleRGB3 = document.getElementById("Hum_RGB_3");
+    const sampleRGB4 = document.getElementById("Hum_RGB_4");
+    const sampleRGB5 = document.getElementById("Hum_RGB_5");
+
     let pickedImg;
     let rand = Math.floor((Math.random() * 5) + 1);
     switch (rand){
@@ -484,23 +367,15 @@ function setImageName(){
   document.getElementById("imageName").innerHTML = currentImgName;
 }
 
-function setAudioNames(){
-  document.getElementById("redAudioName").innerHTML = audioNames['audio1'];
-  document.getElementById("greenAudioName").innerHTML = audioNames['audio2'];
-  document.getElementById("blueAudioName").innerHTML = audioNames['audio3'];
-}
-
 
 // requires server
-loadDefaultImage();
+// loadDefaultImage();
 
 window.onload = function(){
   readySampleImgNumbers();
   readySampleAudNumbers();
   loadSampleHowls(0);
-  setAudioNames();
   setHints();
-  // setTimeout(()=>{document.getElementById("loadingAnim").setAttribute(`style`, `display:none;`)}, 30000);
   document.getElementById("loadingAnim").setAttribute(`style`, `display:none;`);
   setTimeout(loadInstrux, 500);
 }
