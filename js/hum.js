@@ -1,6 +1,3 @@
-
-// const bar = document.getElementById("bar");
-
 let setInt;
 let current_x = 0;
 
