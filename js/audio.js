@@ -1,4 +1,5 @@
 let soundObj = {};
+let sampleAudSelect = [false, false, false, false];
 
 function loadSampleHowls(num){
   const sampleHowls = {

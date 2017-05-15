@@ -1,5 +1,4 @@
 let sampleImgSelect = [false, false, false, false, false];
-let sampleAudSelect = [false, false, false, false];
 
 const sampleImgNumbers = document.getElementsByClassName('sampleImgNumber');
 
