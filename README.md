@@ -22,32 +22,25 @@ Users may upload their own audio and image files. This was implemented with HTML
 
 If a user chooses not to use their own files, they can just use the preloaded samples. There are 5 sample images (all abstract combinations of red, green and blue) and 4 sample sets of multitrack audio (a sustained tone, a beat, a jazz band, and a choir, respectively), meant to show the capabilities of Hum.
 
-### Follows
+## 'Painting' on the canvas
 
-![image of home_page](docs/caps/m-cap-profile.jpg)
+![image of paint](./docs/caps/hum-cap-paint.jpg)
 
-Users may 'follow' other users by clicking on a modular React component. In addition to the user's information, each user profile page contains three feeds: stories and responses written by that user, stories and responses which have been liked by that user, and stories and responses by users followed by that user. This information is quickly retrieved from the server thanks to a series of associations between multiple database tables (`users`, `stories`, `responses`, `likes`, `follows`, and `followings`). Users may view these feeds by clicking on a custom SVG icon menu.
+By clicking on the canvas element, users 'paint' color onto the element (which will then affect the audio levels). This is implemented by tracking mouse events (movement and clicks) on the canvas, and then adding colored strokes based on the position of the mouse when it was pressed and when it was released. The color is chosen via the UI buttons (see below). To enhance UX: when the mouse is positioned over the canvas, the cursor becomes a custom CSS cursor showing the size and shape of the brushstrokes.
 
-Below is an initial wireframe drawing of the user profile page:
+## Button UI
 
-![image of user_profile](docs/wireframes/user-profile.png)
+Outside of the canvas element, users interact with the app via a series of buttons. The buttons are HTML elements with functionality implemented mainly through vanilla JS. These buttons are used to play/pause/stop the audio, select image and audio files to load, select colors to paint, select sample images and audio files, clear the image, clear the paint, and load the instructions modal. Hovering over the buttons brings up a tooltip window with information on that button's functionality.
 
-### Likes
+There are also three SVG elements showing the volume levels for each channel. This was implemented by applying the data used to set the volume for each channel towards setting the fill color of each SVG.
 
-Through the Rails backend, stories are associated with topics and can be 'liked' by users. Database associations allow for a record of all stories and responses that any user has liked. By comparing data from the `likes` table with user information, various React components can detect whether or not the logged-in user has liked a story or response, updating their styles accordingly.
+Below is an early wireframe drawing showing my plans for the instructions modal:
 
-The goal was to seamlessly integrate the experience of 'liking' into the site, i.e. by showing a story's 'likes' in a sidebar that appears and disappears according to the user's positiion in the story (via JavaScript and CSS).
+ ![image of instrux](./docs/wireframes/hum_instructions.png)
 
 ## Future Directions for the Project
 
-In addition to the features already implemented, I plan to continue work on this project.
-
-### Search
-
-By utilizing the pg-search Ruby gem, I can integrate text-based search into the site.
-
-![image of instrux](./docs/wireframes/hum_instructions.png)
-
-### Highlights
-
-Medium allows users to highlight sections of stories that they particularly like. It would be possible to achieve a similar functionality on Message by storing information about each highlighted passage in the database and rendering the highlights via CSS.
+There are many ways this project could expand, including:
+- More controls for modulating the audio.
+- The ability to save files on a backend.
+- The ability to integrate live video imagery rather than just static image files.
