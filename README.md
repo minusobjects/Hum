@@ -1,37 +1,26 @@
 ## Hum
 
-See the 'docs' folder for more information.
+[Hum live][app]
 
-Color-based, visual music/audio mixer and instrument. Built with JavaScript, HTML5/Canvas, and CSS3
-	•	Implemented JavaScript image analysis to dynamically interpret color data.
-	•	Worked with the HowlerJS API and HTML5 audio API to create intuitive UX.
-	•	Devised JavaScript algorithms to manage audio manipulation.
+[app]: http://www.one-timepad.com/hum
 
-# Message
+**Hum** is a color-based, visual music/audio mixer and musical instrument. It's built with JavaScript, HTML5/Canvas, and CSS3. The goal of this project is to create a fun and intuitive music-making tool which can be easily used by people without much musical experience.
 
-[Message live][app]
-
-[app]: http://www.message-medium.net/
-
-![image of home_page](docs/caps/m-cap-home.jpg)
-
-Message is a full-stack single-page web application inspired by the blog/news site Medium. It utilizes Ruby on Rails (backend), PostgreSQL (database), and React.js/Redux (frontend). The goal of Message is to provide an elegant and inviting experience for both the reading and writing of stories.
+![image of app](./docs/caps/hum-cap-home.jpg)
 
 ## Features & Implementation
 
-### Writing and editing stories and responses
+### Audio controlled via color data
 
-![image of story_input](docs/caps/m-cap-story-input.jpg)
+In Hum, three channels of audio are modified via the imagery in the central canvas element: the red, green and blue color channels in the canvas each modify the levels of one of three audio tracks. The individual tracks are loaded and played using an implementation of the HowlerJS library.
 
-Users may write their own stories via a spare, clean interface - the almost-entirely white page is meant to emulate the feeling of a blank sheet of paper. The more-complex functionality only becomes evident after some interaction: image uploading and linked topics via database associations, and rich text editing using tools adapted from the QuillJS library. In order to achieve the desired experience, I had to heavily edit the Quill interface. The database stores stories in specially-formatted HTML, which can then be rendered via React.
+When a user hits the play button, they will see a playhead moving across the canvas; the speed/duration is determined by the shortest of the three audio tracks in use. At each point in the playback, the audio levels are determined by the relative amount of red, green and blue in that slice of the canvas. This was implemented with the JavaScript/Canvas `getImageData()` function, which returns color value as an array of integers. I wrote algorithms to calculate the amount of each color relative to the overall image size, and then change the audio levels accordingly.
 
-![image of story](docs/caps/m-cap-story.jpg)
+### File uploads and sample files
 
-Users may leave responses on stories or on other responses. The chain of responses (sorted by time and by comment thread) is managed through JavaScript algorithms; using the Redux architecture, users may seamlessly leave responses or edit their own responses.
+Users may upload their own audio and image files. This was implemented with HTML file inputs and the HTML5 File API, with additional error handling to determine that the file has the proper extension.
 
-Below is an initial wireframe drawing of the individual story page (note that the sidebar component is used to display that story's likes):
-
-![image of story_page](docs/wireframes/story.png)
+If a user chooses not to use their own files, they can just use the preloaded samples. There are 5 sample images (all abstract combinations of red, green and blue) and 4 sample sets of multitrack audio (a sustained tone, a beat, a jazz band, and a choir, respectively), meant to show the capabilities of Hum.
 
 ### Follows
 
@@ -56,6 +45,8 @@ In addition to the features already implemented, I plan to continue work on this
 ### Search
 
 By utilizing the pg-search Ruby gem, I can integrate text-based search into the site.
+
+![image of instrux](./docs/wireframes/hum_instructions.png)
 
 ### Highlights
 
